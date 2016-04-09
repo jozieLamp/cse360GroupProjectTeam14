@@ -2,6 +2,8 @@ package T_Strife;
 
 import java.util.Scanner;
 
+import com.sun.xml.internal.bind.v2.runtime.Name;
+
 public class dice{
 	
 	
@@ -49,15 +51,20 @@ public class dice{
 		{
 			System.out.println("You rolled Split!");
 			System.out.println("Choose a player you wanna split points with: ");
-			String name = Scan.next();
-			
+			/*
+			String Name = Scan.next();
+			Player.score = (Name.score + Player.score) / 2;
+ 			Name.score = (Name.score + Player.score) / 2
+ 			*/
 		}
 		
 		if(die2 == 2)
 		{
 			System.out.println("You rolled Steal");
 			System.out.println("Choose a player to steal from: ");
+			/*
 			String name = Scan.next();
+			*/
 		}
 		
 		if(die2 == 3)
