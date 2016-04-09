@@ -3,7 +3,6 @@
 	import java.awt.*;
 	import javax.swing.*;
 	import java.awt.event.*;
-	import setup.setup;
 	
 	public class main_menu
 	{
@@ -36,7 +35,6 @@
 					{
 						System.out.println("Go to setup screen");
 						frame.setVisible(false);
-						setup.init();
 					}
 					if (action == leader)
 					{
@@ -58,7 +56,7 @@
 			frame.setVisible(true);
 		}
 		
-		public static void main(String args[]) 
+		public static void init()
 		{
 			new main_menu();
 		}

@@ -10,7 +10,6 @@ public abstract class Player
 	{
 		this.name = name;
 		score = 0;
-		
 	}
 	
 	public String getName()

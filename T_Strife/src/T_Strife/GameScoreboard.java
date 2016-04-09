@@ -4,12 +4,12 @@ import java.util.ArrayList;
 public class GameScoreboard extends Scoreboard
 {
 	int numPlayers;
-	//ArrayList<Player> players;
+	ArrayList<Player> players;
 	
 	public GameScoreboard(int numPlayers, ArrayList<Player> players)
 	{
 		this.numPlayers = numPlayers;
-		players = players;
+		this.players = players;
 	}
 	
 	public void updateScores(ArrayList<Player> players)
@@ -17,9 +17,9 @@ public class GameScoreboard extends Scoreboard
 		for(Score score : scores)
 		{
 			for(Player player : players)
-				if(player.getName().Equals(score.Name))
+				if(player.getName().equals(score.Name))
 				{
-					score.Points = player.getPoints();
+					score.Points = player.getScore();
 				}
 		}
 	}

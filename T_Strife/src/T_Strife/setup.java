@@ -12,19 +12,18 @@ public class setup
 	public setup() 
 	{
 		JFrame frame = new JFrame();
+		JOptionPane pane = new JOptionPane();
 		frame.setSize(400, 200);
 		
 		JPanel top = new JPanel(new BorderLayout());
 		JLabel selectNum = new JLabel("Please select the number of players.");
 		selectNum.setSize(100, 20);
+		top.add(selectNum, BorderLayout.WEST);
 		
 		String[] choices = {"3", "4", "5", "6"}; 
 		JComboBox<String> numPlayers = new JComboBox<String>(choices);
 		numPlayers.setSize(100, 20);
-		
-		top.add(selectNum, BorderLayout.WEST);
-		top.add(selectNum, BorderLayout.EAST);
-	
+		top.add(numPlayers, BorderLayout.EAST);
 		
 		JTextField slot1 = new JTextField();
 		slot1.setSize(100, 20);
@@ -66,13 +65,13 @@ public class setup
 		namePanel.add(name6);
 		namePanel.add(slot6);
 		
-		frame.add(namePanel, BorderLayout.CENTER);
-		
-		frame.add(top, BorderLayout.NORTH);
 		JButton start = new JButton("Start Game");
 		start.setSize(100, 20);
-		frame.add(start, BorderLayout.SOUTH);
 		
+		pane.add(namePanel);
+		pane.add(top);
+		pane.add(start);
+		frame.add(pane);
 		frame.setVisible(true);
 	}
 
