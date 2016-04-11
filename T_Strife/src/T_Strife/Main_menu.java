@@ -4,9 +4,9 @@
 	import javax.swing.*;
 	import java.awt.event.*;
 	
-	public class main_menu
+	public class Main_menu
 	{
-		public main_menu() 
+		public Main_menu() 
 		{
 			JFrame frame = new JFrame("Tendentious Strife - Main Menu");
 			frame.setSize(400, 200);
@@ -35,6 +35,7 @@
 					{
 						System.out.println("Go to setup screen");
 						frame.setVisible(false);
+						Setup.init();
 					}
 					if (action == leader)
 					{
@@ -56,8 +57,8 @@
 			frame.setVisible(true);
 		}
 		
-		public static void init()
+		public static void main(String[] args)
 		{
-			new main_menu();
+			new Main_menu();
 		}
 	}

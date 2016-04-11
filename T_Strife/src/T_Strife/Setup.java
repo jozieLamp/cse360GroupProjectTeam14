@@ -4,12 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class setup
+public class Setup
 {
 	/**
 	 * Constructor for the setup class.
 	 */
-	public setup() 
+	public Setup() 
 	{
 		JFrame frame = new JFrame();
 		JOptionPane pane = new JOptionPane();
@@ -77,6 +77,6 @@ public class setup
 
 	public static void init()
 	{
-		new setup();
+		new Setup();
 	}
 }
