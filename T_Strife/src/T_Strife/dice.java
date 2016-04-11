@@ -1,7 +1,6 @@
 package T_Strife;
 
 import java.util.Scanner;
-
 import com.sun.xml.internal.bind.v2.runtime.Name;
 
 public class dice{
@@ -12,25 +11,24 @@ public class dice{
 	public int die2;
 	
 	//Default Constructor
-	public dice(){
-	
+	public dice()
+	{
 		roll(null);
-		
 	}
 	
 	
-	void roll(String type)
+	void roll(Player player)
 	{	
-		if(type == "Normal")
+		if(player.getType().equals("Normal"))
 		{
 			die1 = (int)(Math.random()*10 + 1);
 			die2 = (int)(Math.random()*5 + 1);
 		}
 		
-		else if(type == "Disadvantaged")
+		else if(player.getType().equals("Disadvantaged"))
 		{
 			die1 = (int)(Math.random()*10 + 1);
-			die2 = (int)(Math.random()*6 + 1);
+			die2 = (int)(Math.random()*5 + 1);
 		}
 	}	
 	
@@ -41,7 +39,7 @@ public class dice{
 		return die1;
 	}
 	
-	public int getDie2(Player player, int score)
+	public int getDie2(Player player)
 	{
 		
 		Scanner Scan = new Scanner(System.in);
@@ -50,11 +48,24 @@ public class dice{
 		{
 			System.out.println("You rolled Split!");
 			System.out.println("Choose a player you wanna split points with: ");
+			
 			/*
-			String Name = Scan.next();
-			Player.score = (Name.score + Player.score) / 2;
- 			Name.score = (Name.score + Player.score) / 2
- 			*/
+			String name = Scan.next();
+			
+			//temp logic
+			While(0)
+			if(//named player equals(name))
+			{
+				System.out.println("Splitting Points with" + player)
+				player.updateScore((int) ((player.getScore() + player.name)/2));
+ 			
+ 				break;
+			}
+			else if
+			{
+				System.out.println("Name does not Exist")
+			}
+			*/
 		}
 		
 		if(die2 == 2)
