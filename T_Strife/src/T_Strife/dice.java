@@ -51,7 +51,7 @@ public class dice{
 			
 			String name = Scan.next();
 			
-			//temporary logic for testing. Pop-up needs to be coded later for this part
+			//temporary logic for testing purposes. Pop-up needs to be coded later for this part
 			while(0)
 			{	
 				
@@ -79,7 +79,7 @@ public class dice{
 			
 			String name = Scan.next();
 			
-			//temporary logic for testing. Pop-up needs to be coded later for this part
+			//temporary logic for testing purposes. Pop-up needs to be coded later for this part
 			while(0)
 			{	
 				
