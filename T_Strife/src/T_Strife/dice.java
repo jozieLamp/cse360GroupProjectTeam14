@@ -39,7 +39,7 @@ public class dice{
 		return die1;
 	}
 	
-	public int getDie2(Player player)
+	public int getDie2(Player player, ArrayList<Player> players)
 	{
 		
 		Scanner Scan = new Scanner(System.in);
@@ -49,32 +49,57 @@ public class dice{
 			System.out.println("You rolled Split!");
 			System.out.println("Choose a player you wanna split points with: ");
 			
-			/*
 			String name = Scan.next();
 			
-			//temp logic
-			While(0)
-			if(//named player equals(name))
-			{
-				System.out.println("Splitting Points with" + player)
-				player.updateScore((int) ((player.getScore() + player.name)/2));
- 			
- 				break;
+			//temporary logic for testing. Pop-up needs to be coded later for this part
+			while(0)
+			{	
+				
+				for(Player player : players)
+				{
+					if(player.getName().equals(name))
+						{
+							System.out.println("Splitting Points with" + name)
+							player.updateScore((int) ((player.getScore() + player.getName().getScore())/2));
+							player.getName().updateScore((int) ((player.getScore() + player.getName().getScore())/2));
+						
+						break;
+						}
+						else if(player.getName() != name)
+						{
+							System.out.println("Name does not Exist try again")
+						}
+				}
 			}
-			else if
-			{
-				System.out.println("Name does not Exist")
-			}
-			*/
-		}
 		
 		if(die2 == 2)
 		{
 			System.out.println("You rolled Steal!");
 			System.out.println("Choose a player to steal from: ");
-			/*
+			
 			String name = Scan.next();
-			*/
+			
+			//temporary logic for testing. Pop-up needs to be coded later for this part
+			while(0)
+			{	
+				
+				for(Player player : players)
+				{
+					if(player.getName().equals(name))
+						{
+							System.out.println("Stealing points from" + name)
+							player.updateScore((int) (player.getScore() + player.getName().getScore()));
+							player.getName().updateScore((int) 0);
+							
+							break;
+						}
+						else if(player.getName() != name)
+						{
+							System.out.println("Name does not Exist try again")
+						}
+				}
+			}
+		
 		}
 		
 		if(die2 == 3)
