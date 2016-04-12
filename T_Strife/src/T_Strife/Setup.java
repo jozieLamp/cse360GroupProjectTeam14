@@ -11,6 +11,7 @@ public class Setup
 	 */
 	public Setup() 
 	{
+		JFrame.setDefaultLookAndFeelDecorated(true);
 		JFrame frame = new JFrame();
 //		JOptionPane pane = new JOptionPane("Please select the number of players:");
 		JPanel panel = new JPanel(new BorderLayout());
@@ -149,7 +150,7 @@ public class Setup
 				{
 					System.out.println("Go to game screen");
 					frame.setVisible(false);
-					//Gameboard.init();
+					Gameboard.init();
 				}
 			}
 		} //end of ButtonListener

@@ -8,13 +8,14 @@
 	{
 		public Main_menu() 
 		{
+			JFrame.setDefaultLookAndFeelDecorated(true);
 			JFrame frame = new JFrame("Tendentious Strife - Main Menu");
 			frame.setSize(400, 400);
 			
-			JPanel panel = new JPanel(new GridBagLayout());
+			JPanel panel = new JPanel(new BorderLayout());
 			JLabel name = new JLabel("TENDENTIOUS STRIFE");
 			name.setBounds(200, 50, 100, 20);
-			panel.add(name);
+			panel.add(name, BorderLayout.NORTH);
 			
 			
 			JPanel centerPanel = new JPanel(new GridLayout(3, 1));
@@ -65,6 +66,7 @@
 //			frame.add(buttons);
 			panel.setBounds(200, 50, 100, 20);
 			frame.add(panel);
+			frame.add(centerPanel);
 			frame.setVisible(true);
 		}
 		
