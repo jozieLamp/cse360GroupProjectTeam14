@@ -16,7 +16,11 @@ public class Gameboard
 		JPanel grid = new JPanel(new GridBagLayout());
 		JPanel panel = new JPanel();
 		
+		JLabel rolled = new JLabel("Number rolled: ");
 		
+		//if (dice.die1 == 1)
+		//rolled = ("Number");
+			
 		frame.add(panel);
 		panel.setBounds(0, 800, 800, 0);
 		frame.setVisible(true);
