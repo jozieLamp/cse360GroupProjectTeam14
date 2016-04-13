@@ -2,7 +2,7 @@ package T_Strife;
 
 public class DisadvantagedPlayer extends Player
 {
-	String type;
+	private String type;
 	
 	public DisadvantagedPlayer(String name)
 	{
