@@ -1,0 +1,3 @@
+121	Richard Tuznik	true	19
+102	Ronald McDonald	false	43
+87	Barack Obama	false	10
