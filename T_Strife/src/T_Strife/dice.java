@@ -7,8 +7,8 @@ public class dice{
 	
 	
 	//declaring variables
-	public int die1;
-	public int die2;
+	private int die1;
+	private int die2;
 	
 	//Default Constructor
 	public dice()
@@ -32,13 +32,17 @@ public class dice{
 		}
 	}	
 	
-	public int getDie1(Player player)
-	{
-		player.updateScore(player.getScore() + die1);
-		
+	public int getDie1()
+	{		
 		return die1;
 	}
 	
+	public int getDie2()
+	{
+		return die2;
+	}
+	
+	/*
 	public int getDie2(Player player, ArrayList<Player> players)
 	{
 		
@@ -122,5 +126,6 @@ public class dice{
 		return 0;
 	}
 	
+}*/
 }
 	
