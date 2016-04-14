@@ -8,13 +8,20 @@ import javax.swing.SwingConstants;
 
 import T_Strife.Scoreboard.Score;
 
+/**
+ * Class to represent the game scoreboard. Allows one to update the scores themselves, and then update the GUI scoreboard.
+ * @author Richard Tuznik (PIN 825)
+ */
 public class GameScoreboard extends Scoreboard
 {
 	private int numPlayers;
 	private JPanel scorePanel;
-	//ArrayList<Player> players;
 	
-	 //Score Panel should be GridLayout(numPlayers + 1,3)
+	/**
+	 * GameScoreboard - Creates a new game scoreboard
+	 * @param players - The players in the game
+	 * @param scorePanel - The panel on which to draw the scoreboard (GridLayout(numPlayers + 1, 3))
+	 */
 	public GameScoreboard(ArrayList<Player> players, JPanel scorePanel)
 	{
 		this.numPlayers = players.size();
@@ -29,6 +36,10 @@ public class GameScoreboard extends Scoreboard
 		updateScoreBoard();
 	}
 	
+	/**
+	 * UpdateScores - Updates the scores for each player in the provided list
+	 * @param players - The players in the game with updated scores
+	 */
 	public void updateScores(ArrayList<Player> players)
 	{
 		for(Score score : scores)
@@ -42,7 +53,9 @@ public class GameScoreboard extends Scoreboard
 		updateScoreBoard();
 	}
 	
-	//Pass in the JPanel where the score will be
+	/**
+	 * updateScoreBoard() - Updates the GUI scoreboard
+	 */
 	public void updateScoreBoard()
 	{
 		JLabel rLabel = new JLabel("Rank");
