@@ -49,10 +49,10 @@ public class Gameboard
 		while (!winner)
 		{
 			rollDie(frame, 1);
-			rollMessage(frame, 1, dice.getDie1());
+			//rollMessage(frame, 1, );
 			// 1st die roll happens. Then:
 			rollDie(frame, 2);
-			rollMessage(frame, 2, dice.getDie2());
+			//rollMessage(frame, 2, dice.getDie2());
 		}
 	}
 	

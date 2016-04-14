@@ -80,18 +80,22 @@ public class Setup
 					{
 						if (countPlayers == 3)
 						{
-							centerPanel.add(name4);
-							centerPanel.add(slot4);
+							names.add(name4);
+							names.add(slot4);
+							names.validate();
+							System.out.println(countPlayers);
 						}
 						else if (countPlayers == 4)
 						{
-							centerPanel.add(name5);
-							centerPanel.add(slot5);
+							names.add(name5);
+							names.add(slot5);
+							names.validate();
 						}
 						else if (countPlayers == 5)
 						{
-							centerPanel.add(name6);
-							centerPanel.add(slot6);
+							names.add(name6);
+							names.add(slot6);
+							names.validate();
 						}
 						countPlayers++;
 					}
@@ -109,6 +113,7 @@ public class Setup
 						{
 							centerPanel.remove(name4);
 							centerPanel.remove(slot4);
+							names.validate();
 						}
 						else if (countPlayers == 5)
 						{
@@ -130,6 +135,7 @@ public class Setup
 		remove.addActionListener(new PlayerListener());
 		centerPanel.add(add);
 		centerPanel.add(remove);
+		centerPanel.add(names);
 		
 		
 //		String[] choices = {" ", "3", "4", "5", "6"}; 
