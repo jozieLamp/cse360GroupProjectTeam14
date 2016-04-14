@@ -43,11 +43,17 @@ public class Gameboard
 //		panel.add(rolled2);
 		
 		frame.add(panel);
-		
 		frame.setVisible(true);
-		rollDie(frame, 1);
-		// 1st die roll happens. Then:
-		rollDie(frame, 2);
+		
+		boolean winner = false;
+		while (!winner)
+		{
+			rollDie(frame, 1);
+			rollMessage(frame, 1, dice.getDie1());
+			// 1st die roll happens. Then:
+			rollDie(frame, 2);
+			rollMessage(frame, 2, dice.getDie2());
+		}
 	}
 	
 	/**
@@ -63,6 +69,74 @@ public class Gameboard
 			roll.showMessageDialog(frame, "It is Player X's turn. Roll your first die!", "First Die Roll", JOptionPane.INFORMATION_MESSAGE);
 		if (type == 2)
 			roll.showMessageDialog(frame, "Now, roll your second die!", "Second Die Roll", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	public static void rollMessage(JFrame frame, int type, int roll)
+	{
+		JLabel display;
+		if (type == 1)
+		{
+			display = new JLabel("You rolled a " + roll + "\n Add this to your score!" );
+			display.setBounds(300, 250, 200, 100);
+			frame.add(display);
+		}
+			
+		if (type == 2)
+		{
+			if (roll == 1)
+			{
+				display = new JLabel("\nNumber rolled: 1" + 
+									 "\nAction taken: Split Points!" +
+									 "\n(Select another player and split your points with them)");
+				display.setBounds(300, 250, 200, 100);
+				frame.add(display);
+			}
+			if (roll == 2)
+			{
+				display = new JLabel("\nNumber rolled: 2" +
+									 "\nAction taken: Steal Points!" + 
+									 "\n(Select another player and take that many points from them)");
+				display.setBounds(300, 250, 200, 100);
+				frame.add(display);
+			}
+			if (roll == 3)
+			{
+				display = new JLabel("\nNumber rolled: 3" +
+									 "\nAction taken: Multiply Points!" + 
+									 "\n(Your point total is multiplied by 1.5)");
+				display.setBounds(300, 250, 200, 100);
+				frame.add(display);
+			}
+			if (roll == 4)
+			{
+				display = new JLabel("Number rolled: 4" +
+									 "\nAction taken: Lose Points!" + 
+									 "\n(You lose the points earned in the first roll. Sorry!)");
+				display.setBounds(300, 250, 200, 100);
+				frame.add(display);
+			}
+			if (roll == 5)
+			{
+				display = new JLabel("Number rolled: 4" +
+									 "\nAction taken: Tax Points!" +
+									 "\n(You tax every other player for 10% of their points!)");
+				display.setBounds(300, 250, 200, 100);
+				frame.add(display);
+			}				
+		}
+		Wait();
+	}
+	
+	public static void Wait()
+	{
+		try
+		{
+			Thread.sleep(3000);
+		}
+		catch (InterruptedException e) 
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public static void init()

@@ -3,6 +3,8 @@
 	import java.awt.*;
 	import javax.swing.*;
 	import java.awt.event.*;
+	import java.util.Random;
+	import java.util.Scanner;
 	
 	public class Main_menu
 	{
@@ -44,13 +46,11 @@
 					Object action = event.getSource();
 					if (action == start)
 					{
-						System.out.println("Go to setup screen");
 						frame.setVisible(false);
 						Setup.init();
 					}
 					if (action == leader)
 					{
-						System.out.println("Go to leaderboard");
 						frame.setVisible(false);
 						//leaderboard.init();
 					}
