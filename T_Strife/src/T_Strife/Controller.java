@@ -1,143 +1,103 @@
 package T_Strife;
 
-import java.util.Scanner;
-
-public class conditionCheck 
-{
-	static Scanner scan = new Scanner(System.in);
-	
-	public static Player[] split(Player[] playerList, int currentPlayer)
-	{
-		int iterator = 0;
-		boolean found = false;
+class Controller {
 		
-		//SUBJECT TO CHANGE
-		System.out.println("Enter the a NAME");
-		String playName = scan.next();
-		while(!found)
-		{
-			while(iterator < playerList.length && !found)
-			{
-				if(playerList[iterator].equals(playName))
-				{
-					found = true;
-				}
-				else
-					iterator++;
-			}
+		private int numPlayers = 0;
+		private int pointCap = 0;
+		private Player[] allPlayers = new Player[6];
+		private dice gameDice = new dice();
 		
-			if (found)
-			{
-				int playOne = playerList[currentPlayer].getScore();
-				int playTwo = playerList[iterator].getScore();
-			
-				int average = ((playOne + playTwo) / 2);
-			
-				playerList[currentPlayer].updateScore(average);
-				playerList[iterator].updateScore(average);
-			}
-			else // player not found
-			{
-				System.out.println("Player " + playName + " was not found");
-			}
-		//****
+		public void setNumPlayers(int totalPlayers)
+		{	
+			numPlayers = totalPlayers;
 		}
-		return playerList;
-	}
-	
-	
-	
-	public static Player[] steal(Player[] playerList, int currentPlayer, int rollOne, int numPlayers)
-	{
-		int iterator = 0;
-		boolean found = false;
 		
-		//SUBJECT TO CHANGE
-		System.out.println("Enter the a NAME");
-		String playName = scan.next();
-		while(!found)
+		
+		public void setPlayers(String[] playNames, int disAdvanIndex)
 		{
-			while(iterator < numPlayers && !found)
+			for(int i = 0; i<numPlayers; i++)
 			{
-				if(playerList[iterator].equals(playName))
-				{
-					found = true;
-				}
+				if(i != disAdvanIndex)
+					allPlayers[i] = new NormalPlayer(playNames[i]);
 				else
-					iterator++;
+					allPlayers[i] = new DisadvantagedPlayer(playNames[i]);
 			}
-		
-			if (found)
-			{
-				int playOne = playerList[currentPlayer].getScore();
-				int playTwo = playerList[iterator].getScore();
-			
-				if(playTwo <= rollOne)
-				{
-					playerList[currentPlayer].updateScore(playTwo + playOne);
-					playerList[iterator].updateScore(0);
-				}
-				else
-				{
-					playerList[currentPlayer].updateScore(rollOne + playOne);
-					playerList[iterator].updateScore(playTwo - rollOne);
-				}
-			}
-			else // player not found
-			{
-				System.out.println("Player " + playName + " was not found");
-			}
-		//****
 		}
-		return playerList;
-	}
-	
-	
-	
-	public static Player[] multiply(Player[] playerList, int currentPlayer)
-	{
-		int playOneScore = playerList[currentPlayer].getScore();
-		
-		playerList[currentPlayer].updateScore((int)(playOneScore * 1.5));
-		
-		return playerList;
-	}
 
-	
-	
-	public static Player[] lose(Player[] playerList, int currentPlayer, int rollOne)
-	{
-		int playOneScore = playerList[currentPlayer].getScore();
-		
-		playerList[currentPlayer].updateScore(playOneScore - rollOne);
-		
-		return playerList;
-	}
-	
-	public static Player[] tax(Player[] playerList, int currentPlayer, int numPlayers)
-	{
-		int taxOnCurrent = 0;
-		int currentPlayerScore = 0;
-		int totalTax = 0;
-		
-		for(int iterator = 0; iterator < numPlayers; iterator++)
+		public void setWinPoints(int pointLimit)
 		{
-			if(iterator != currentPlayer)
+			pointCap = pointLimit;
+		}
+		
+		
+		public Player[] game()
+		{
+			boolean gameWon = false;
+			
+			int dieOne;
+			int dieTwo;
+			int type;	
+			
+			while(!gameWon) // repeats until game is won
 			{
-				currentPlayerScore = playerList[iterator].getScore();
-				taxOnCurrent = (int)(currentPlayerScore * .10);
+				dieOne = -1;
+				dieTwo = -1;
+				type = -1; // type of player, 0 for Normal, 1 for Disadvantaged
 				
-				playerList[iterator].updateScore(currentPlayerScore - taxOnCurrent);
-				totalTax += taxOnCurrent;
-	
-			}	
+				for(int i = 0; i < numPlayers; i ++) // iterates through players for each turn
+				{
+					gameDice.roll(allPlayers[i]);
+					
+					dieOne = gameDice.getDie1();
+					dieTwo = gameDice.getDie2();
+					
+					if(allPlayers[i].getType().equals("Normal"))
+						type = 0;
+					else
+						type = 1;
+					
+					// play animation, whatever we decide on an transition between rolls
+					
+					System.out.println("You rolled a " + dieOne + "on the score dice");
+					
+					allPlayers[i].updateScore(dieOne + allPlayers[i].getScore());
+					// animation
+					
+					System.out.println("You rolled a " + dieTwo + "on the condition dice");
+					
+					
+					switch(dieTwo)
+					{
+					case 1: // Split
+						allPlayers = conditionCheck.split(allPlayers, i);
+						break;
+					
+					case 2: // Steal
+						allPlayers = conditionCheck.steal(allPlayers, i, dieOne, numPlayers);
+						break;
+					
+					case 3: // Multiply
+						allPlayers = conditionCheck.multiply(allPlayers, i);
+						break;
+					
+					case 4: // Lose Points
+						allPlayers = conditionCheck.lose(allPlayers, i, dieOne);
+						break;
+					
+					case 5: // Tax
+						allPlayers = conditionCheck.tax(allPlayers, i, numPlayers);
+						break;
+					
+					default: // do Nothing
+					}
+					
+					if(allPlayers[i].getScore() >= pointCap)
+						gameWon = true;
+				}
+			}
+			
+			return allPlayers;
+			
 		}
 		
-		currentPlayerScore = playerList[currentPlayer].getScore();
-		playerList[currentPlayer].updateScore(currentPlayerScore + totalTax);
-		
-		return playerList;
-	}
-	
-	
 }
