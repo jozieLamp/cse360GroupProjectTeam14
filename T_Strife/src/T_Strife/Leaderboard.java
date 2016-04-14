@@ -220,10 +220,11 @@ public class Leaderboard extends Scoreboard {
 		JScrollPane scrollPane = new JScrollPane(scorePanel);
 		//scrollPane.add(scorePanel);
  
-		//containerMenu.add(playerTypeSubMenu);
+
 		JPanel optionPanel = new JPanel(new GridLayout(1, 3));
-		optionPanel.add(playerTypeSubMenu);
-		//optionPanel.add(containerMenu);
+		JMenuBar playerTypeBar = new JMenuBar();
+		playerTypeBar.add(playerTypeSubMenu);
+		optionPanel.add(playerTypeBar);
 		optionPanel.add(searchField);
 		optionPanel.add(confirmSearchButton);
 
@@ -257,7 +258,7 @@ JOptionPane.show...(myParentContainer, myScroller, myTitle, JOptionPane.PLAIN_ME
 		JDialog leaderboardPopUp = new JDialog(new JFrame(), "Leaderboard");
 		leaderboardPopUp.add(basePanel);
 		leaderboardPopUp.setVisible(true);
-        leaderboardPopUp.setSize(700, 200);
+        leaderboardPopUp.setSize(700, 400);
 	}
 
 	private int searchScore(String name) 
@@ -414,33 +415,95 @@ JOptionPane.show...(myParentContainer, myScroller, myTitle, JOptionPane.PLAIN_ME
 	private class RadioButtonListener implements ItemListener {
 		public void itemStateChanged(ItemEvent e) {
 			Object dif = e.getSource();
+			
+			int numberOfDisadvantagedPlayers = 0;
+			for(Score score : scores)
+			{
+				if(score.Disadvantaged)
+					numberOfDisadvantagedPlayers++;
+			}
+			
 			// Change type depending on which type button was pressed
-			if (dif.equals(butAll)) {
+			if (dif.equals(butAll)) 
+			{
 				playerType = 0;
-			} else if (dif.equals(butDis)) {
+				leaderboardGridLayout.setRows(scores.size() + 1);
+			}
+			else if (dif.equals(butDis))
+			{
 				playerType = 1;
-			} else if (dif.equals(butNorm)) {
+				leaderboardGridLayout.setRows(numberOfDisadvantagedPlayers + 1);
+			} 
+			else if (dif.equals(butNorm)) 
+			{
 				playerType = 2;
+				leaderboardGridLayout.setRows((scores.size() - numberOfDisadvantagedPlayers) + 1);
 			}
 			
 			scorePanel.removeAll();
-			scorePanel.add(new JLabel("Rank"));
-			scorePanel.add(new JLabel("Name"));
-			scorePanel.add(new JLabel("Points"));
-			scorePanel.add(new JLabel("Number of Turns"));
-			scorePanel.add(new JLabel("Player Type"));
+			
+			JLabel rLabel = new JLabel("Rank");
+			JLabel nLabel = new JLabel("Name");
+			JLabel pLabel = new JLabel("Points");
+			JLabel tLabel = new JLabel("Turns");
+			JLabel dLabel = new JLabel("Player Type");
+
+			
+			//Center each label
+			rLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			nLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			pLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			tLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			dLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			
+			//Add borders
+			rLabel.setBorder(BorderFactory.createEtchedBorder());
+			nLabel.setBorder(BorderFactory.createEtchedBorder());
+			pLabel.setBorder(BorderFactory.createEtchedBorder());
+			tLabel.setBorder(BorderFactory.createEtchedBorder());
+			dLabel.setBorder(BorderFactory.createEtchedBorder());
+			
+			scorePanel.add(rLabel);
+			scorePanel.add(nLabel);
+			scorePanel.add(pLabel);
+			scorePanel.add(tLabel);
+			scorePanel.add(dLabel);
 			for (int index = 0; index < scores.size(); index++) 
 			{
 				Score currentScore = scores.get(index);
 				if(playerType == 0 || (playerType == 1 && currentScore.Disadvantaged == true) || (playerType == 2 && currentScore.Disadvantaged == false))
 				{
-				scorePanel.add(new JLabel(index + 1 + "."));
-				scorePanel.add(new JLabel(currentScore.Name));
-				scorePanel.add(new JLabel(currentScore.Points + ""));
-				scorePanel.add(new JLabel(currentScore.NumberTurns + ""));
-				scorePanel.add(new JLabel(currentScore.Disadvantaged == true ? "Disadvantaged" : "Normal"));
+					JLabel rankLabel = new JLabel(index + 1 + ".");
+					JLabel nameLabel = new JLabel(currentScore.Name);
+					JLabel pointsLabel = new JLabel(currentScore.Points + "");
+					JLabel turnsLabel = new JLabel(currentScore.NumberTurns + "");
+					JLabel disadvLabel = new JLabel(currentScore.Disadvantaged == true ? "Disadvantaged" : "Normal");
+
+					
+					//Center each label
+					rankLabel.setHorizontalAlignment(SwingConstants.CENTER);
+					nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+					pointsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+					turnsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+					disadvLabel.setHorizontalAlignment(SwingConstants.CENTER);
+					
+					//Add borders
+					rankLabel.setBorder(BorderFactory.createEtchedBorder());
+					nameLabel.setBorder(BorderFactory.createEtchedBorder());
+					pointsLabel.setBorder(BorderFactory.createEtchedBorder());
+					turnsLabel.setBorder(BorderFactory.createEtchedBorder());
+					disadvLabel.setBorder(BorderFactory.createEtchedBorder());
+					
+					//Add to scorePanel
+					scorePanel.add(rankLabel);
+					scorePanel.add(nameLabel);
+					scorePanel.add(pointsLabel);
+					scorePanel.add(turnsLabel);
+					scorePanel.add(disadvLabel);
+					scorePanel.validate();
 				}
 			}
+			scorePanel.validate();
 		}
 	}
 }
