@@ -75,10 +75,17 @@ public class Leaderboard extends Scoreboard {
 		}
 	}
 
-	public void addToLeaderboard(ArrayList<Score> newScores, int turn) {
-		if (scores == null)
-			getStoredLeaderboard();
+	public void addToLeaderboard(ArrayList<Player> players, int turn) {
+		//if (scores == null)
+		getStoredLeaderboard();
 
+		ArrayList<Score> newScores = new ArrayList<Score>();
+		for(Player player : players)
+		{
+			Score score = new Score(player.getScore(), player.getName(), player.getType(), turn);
+			newScores.add(score);
+			
+		}
 		for (Score score : newScores) {
 			boolean add = false;
 			int index = 0;
