@@ -1,103 +1,107 @@
 package T_Strife;
 
-class Controller {
-		
-		private int numPlayers = 0;
-		private int pointCap = 0;
-		private Player[] allPlayers = new Player[6];
-		private dice gameDice = new dice();
-		
-		public void setNumPlayers(int totalPlayers)
-		{	
-			numPlayers = totalPlayers;
-		}
-		
-		
-		public void setPlayers(String[] playNames, int disAdvanIndex)
-		{
-			for(int i = 0; i<numPlayers; i++)
-			{
-				if(i != disAdvanIndex)
-					allPlayers[i] = new NormalPlayer(playNames[i]);
-				else
-					allPlayers[i] = new DisadvantagedPlayer(playNames[i]);
-			}
-		}
+public class Controller {
 
-		public void setWinPoints(int pointLimit)
+	public static void setNumPlayers(int totalPlayers, GameData game)
+	{	
+		game.numPlayers = totalPlayers;
+	}
+	
+	
+	public static void setPlayers(String[] playNames, int disAdvanIndex, GameData game)
+	{
+		for(int i = 0; i<game.numPlayers; i++)
 		{
-			pointCap = pointLimit;
+			if(i != disAdvanIndex)
+				game.allPlayers[i] = new NormalPlayer(playNames[i]);
+			else
+				game.allPlayers[i] = new DisadvantagedPlayer(playNames[i]);
 		}
+	}
+
+	public static void setWinPoints(int pointLimit, GameData game)
+	{
+		game.pointCap = pointLimit;
+	}
+	
+	
+	public static Player[] game(GameData game)
+	{
+		boolean gameWon = false;
+		
+		int dieOne;
+		int dieTwo;
+		int type;
 		
 		
-		public Player[] game()
+		while(!gameWon) // repeats until game is won
 		{
-			boolean gameWon = false;
+			dieOne = -1;
+			dieTwo = -1;
+			type = -1; // type of player, 0 for Normal, 1 for Disadvantaged
 			
-			int dieOne;
-			int dieTwo;
-			int type;	
-			
-			while(!gameWon) // repeats until game is won
+			for(int i = 0; i < game.numPlayers; i ++) // iterates through players for each turn
 			{
-				dieOne = -1;
-				dieTwo = -1;
-				type = -1; // type of player, 0 for Normal, 1 for Disadvantaged
+				game.gameDice.roll(game.allPlayers[i]);
 				
-				for(int i = 0; i < numPlayers; i ++) // iterates through players for each turn
+				dieOne = game.gameDice.getDie1();
+				dieTwo = game.gameDice.getDie2();
+				
+				if(game.allPlayers[i].getType().equals("Normal"))
+					type = 0;
+				else
+					type = 1;
+				
+				// play animation, whatever we decide on an transition between rolls
+				
+				System.out.println("You rolled a " + dieOne + "on the score dice");
+				
+				// animation
+				
+				System.out.println("You rolled a " + dieTwo + "on the condition dice");
+				
+				
+				switch(dieTwo)
 				{
-					gameDice.roll(allPlayers[i]);
-					
-					dieOne = gameDice.getDie1();
-					dieTwo = gameDice.getDie2();
-					
-					if(allPlayers[i].getType().equals("Normal"))
-						type = 0;
-					else
-						type = 1;
-					
-					// play animation, whatever we decide on an transition between rolls
-					
-					System.out.println("You rolled a " + dieOne + "on the score dice");
-					
-					allPlayers[i].updateScore(dieOne + allPlayers[i].getScore());
-					// animation
-					
-					System.out.println("You rolled a " + dieTwo + "on the condition dice");
-					
-					
-					switch(dieTwo)
-					{
-					case 1: // Split
-						allPlayers = conditionCheck.split(allPlayers, i);
-						break;
-					
-					case 2: // Steal
-						allPlayers = conditionCheck.steal(allPlayers, i, dieOne, numPlayers);
-						break;
-					
-					case 3: // Multiply
-						allPlayers = conditionCheck.multiply(allPlayers, i);
-						break;
-					
-					case 4: // Lose Points
-						allPlayers = conditionCheck.lose(allPlayers, i, dieOne);
-						break;
-					
-					case 5: // Tax
-						allPlayers = conditionCheck.tax(allPlayers, i, numPlayers);
-						break;
-					
-					default: // do Nothing
-					}
-					
-					if(allPlayers[i].getScore() >= pointCap)
-						gameWon = true;
+				case 1: // Split
+					game.allPlayers = conditionCheck.split(game.allPlayers, i);
+					break;
+				
+				case 2: // Steal
+					game.allPlayers = conditionCheck.steal(game.allPlayers, i, dieOne, game.numPlayers);
+					break;
+				
+				case 3: // Multiply
+					game.allPlayers = conditionCheck.multiply(game.allPlayers, i);
+					break;
+				
+				case 4: // Lose Points
+					game.allPlayers = conditionCheck.lose(game.allPlayers, i, dieOne);
+					break;
+				
+				case 5: // Tax
+					game.allPlayers = conditionCheck.tax(game.allPlayers, i, game.numPlayers);
+					break;
+				
+				default: // do Nothing
 				}
+				
+				if(game.allPlayers[i].getScore() >= game.pointCap)
+					gameWon = true;
 			}
-			
-			return allPlayers;
-			
 		}
 		
+		return game.allPlayers;
+		
+	}
+	
+}
+
+
+class GameData
+{
+	public int numPlayers = 0;
+	public int pointCap = 0;
+	public Player[] allPlayers = new Player[6];
+	public dice gameDice = new dice();
 }

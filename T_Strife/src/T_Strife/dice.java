@@ -33,9 +33,5 @@ public class dice{
 	{
 		return die2;
 	}
-	
-	
-	
-	
 }
 	

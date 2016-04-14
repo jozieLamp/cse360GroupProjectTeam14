@@ -75,9 +75,9 @@ public class Setup
 			 * PlayerListener - Takes an action based on the button pressed.
 			 * @param event Based on the button pressed, main menu leads to another interface.
 			 */
+			int countPlayers = 3;
 			public void actionPerformed(ActionEvent event)
 			{
-				int countPlayers = 6;
 				Object action = event.getSource();
 				if (action == add)
 				{
@@ -96,6 +96,7 @@ public class Setup
 							slot5.setVisible(false);
 							name6.setVisible(false);
 							slot6.setVisible(false);
+//							countPlayers = 4;
 						}
 						else if (countPlayers == 4)
 						{
@@ -105,6 +106,7 @@ public class Setup
 							slot5.setVisible(true);
 							name6.setVisible(false);
 							slot6.setVisible(false);
+//							countPlayers = 5;
 						}
 						else if (countPlayers == 5)
 						{
@@ -114,6 +116,7 @@ public class Setup
 							slot5.setVisible(true);
 							name6.setVisible(true);
 							slot6.setVisible(true);
+//							countPlayers = 6;
 						}
 						countPlayers++;
 					}
@@ -135,6 +138,7 @@ public class Setup
 							slot5.setVisible(false);
 							name6.setVisible(false);
 							slot6.setVisible(false);
+//							countPlayers = 3;
 						}
 						else if (countPlayers == 5)
 						{
@@ -144,6 +148,7 @@ public class Setup
 							slot5.setVisible(false);
 							name6.setVisible(false);
 							slot6.setVisible(false);
+//							countPlayers = 4;
 						}
 						else if (countPlayers == 6)
 						{
@@ -153,24 +158,20 @@ public class Setup
 							slot5.setVisible(true);
 							name6.setVisible(false);
 							slot6.setVisible(false);
+//							countPlayers = 5;
 						}
 						countPlayers--;
 					}
 				}
-		}
-	} //end of ButtonListener
+			}
+		} //end of ButtonListener
 		
-		add.addActionListener(new PlayerListener());
-		remove.addActionListener(new PlayerListener());
+		PlayerListener pl = new PlayerListener();
+		add.addActionListener(pl);
+		remove.addActionListener(pl);
 		topPanel.add(add);
 		topPanel.add(remove);
 		centerPanel.add(names);
-		
-//		String[] choices = {" ", "3", "4", "5", "6"}; 
-//		JComboBox<String> numPlayers = new JComboBox<String>(choices);
-//		numPlayers.setBounds(265, 50, 50, 20);
-//		frame.add(numPlayers);
-//		pane.add(numPlayers);
 		
 		JButton start = new JButton("Start Game");
 		start.setBounds(200, 350, 100, 20);
@@ -189,7 +190,7 @@ public class Setup
 				{
 					System.out.println("Go to game screen");
 					frame.setVisible(false);
-//					Gameboard.init();
+//					
 				}
 			}
 		} //end of ButtonListener
@@ -204,7 +205,17 @@ public class Setup
 		
 		frame.setVisible(true);
 	}
-
+	
+	public int incrNumPlayers(int numPlayers)
+	{
+		return numPlayers++;
+	}
+	
+	public int decrNumPlayers(int numPlayers)
+	{
+		return numPlayers--;
+	}
+	
 	public static void init()
 	{
 		new Setup();

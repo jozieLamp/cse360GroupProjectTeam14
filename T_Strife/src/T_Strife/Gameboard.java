@@ -18,33 +18,7 @@ public class Gameboard
 		
 		JPanel grid = new JPanel(new GridBagLayout());
 		JPanel panel = new JPanel();
-//		JLabel rolled1 = new JLabel("You rolled a: " + dice.getDie1() + "\n Add this to your score!");
-		JLabel rolled2;
-		
-//		if (dice.getDie2() == 1)
-//		{
-//			rolled2 = new JLabel("Number rolled: 1\nAction taken: Split");
-//		}
-//		if (dice.getDie2() == 2)
-//		{
-//			rolled2 = new JLabel("Number rolled: 2\nAction taken: Steal Points");
-//		}
-//		if (dice.getDie2() == 3)
-//		{
-//			rolled2 = new JLabel("Number rolled: 3\nAction taken: Multiply Points");
-//		}
-//		if (dice.getDie2() == 4)
-//		{
-//			rolled2 = new JLabel("Number rolled: 4\nAction taken: Lose Points Gained");
-//		}
-//		if (dice.getDie2() == 5)
-//		{
-//			rolled2 = new JLabel("Number rolled: 4\nAction taken: Tax");
-//		}
-		
-//		panel.add(rolled1);
-//		panel.add(rolled2);
-		
+
 		JButton buttonFirstRoll = new JButton("Roll Score Die");
 		JButton buttonSecondRoll = new JButton("Roll Condition Die");
 		JPanel buttonPanel = new JPanel(new GridLayout(2, 1));
@@ -70,6 +44,7 @@ public class Gameboard
 //			//rollMessage(frame, 2, dice.getDie2());
 //		}
 	}
+	
 	
 	/**
 	 * rollDie - Used to display message for rolling the die; creates a popup.
