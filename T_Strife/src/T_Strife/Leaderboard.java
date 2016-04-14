@@ -37,7 +37,7 @@ public class Leaderboard extends Scoreboard {
 	public static void main(String[] args) //TEMPORARY FOR TESTING
 	{
 		Leaderboard l = new Leaderboard("leaderboard.txt");
-//		l.displayLeaderBoard(null);
+		l.displayLeaderBoard(null);
 	}
 	public Leaderboard(String fileName) {
 		this.fileName = fileName;
@@ -82,7 +82,7 @@ public class Leaderboard extends Scoreboard {
 		ArrayList<Score> newScores = new ArrayList<Score>();
 		for(Player player : players)
 		{
-			Score score = new Score(player.getScore(), player.getName(), player.getType(), turn);
+			Score score = new Score(player.getScore(), player.getName(), player.getType().equals("Disadvantaged"), turn);
 			newScores.add(score);
 			
 		}
