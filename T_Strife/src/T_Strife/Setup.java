@@ -14,14 +14,11 @@ public class Setup
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		JFrame frame = new JFrame();
 		
-		JPanel panel = new JPanel(new BorderLayout());
-		JPanel centerPanel = new JPanel(new GridBagLayout());
+		JPanel setupPanel = new JPanel(new GridLayout(3, 1));
+		JPanel topPanel = new JPanel(new GridLayout(1, 2));
+		JPanel centerPanel = new JPanel();
 		JPanel botPanel = new JPanel();
 		frame.setSize(400, 400);
-		
-		JLabel select = new JLabel("Please select the number of players:");
-		select.setBounds(50, 50, 250, 20);
-		frame.add(select);
 		
 		JLabel name1 = new JLabel("Player 1: ");
 		name1.setSize(50, 20);
@@ -35,14 +32,6 @@ public class Setup
 		slot2.setSize(100, 20);
 		JTextField slot3 = new JTextField();
 		slot3.setSize(100, 20);
-		JPanel names = new JPanel(new GridLayout(6, 2));
-		names.add(name1);
-		names.add(slot1);
-		names.add(name2);
-		names.add(slot2);
-		names.add(name3);
-		names.add(slot3);
-		
 		JLabel name4 = new JLabel("Player 4: ");
 		name4.setSize(50, 20);
 		JLabel name5 = new JLabel("Player 5: ");
@@ -56,6 +45,27 @@ public class Setup
 		JTextField slot6 = new JTextField();
 		slot6.setSize(100, 20);
 		
+		JPanel names = new JPanel(new GridLayout(6, 2));
+		names.add(name1);
+		names.add(slot1);
+		names.add(name2);
+		names.add(slot2);
+		names.add(name3);
+		names.add(slot3);
+		names.add(name4);
+		names.add(slot4);
+		names.add(name5);
+		names.add(slot5);
+		names.add(name6);
+		names.add(slot6);
+		
+		name4.setVisible(false);
+		slot4.setVisible(false);
+		name5.setVisible(false);
+		slot5.setVisible(false);
+		name6.setVisible(false);
+		slot6.setVisible(false);
+		
 		JButton add = new JButton("Add a player");
 		JButton remove = new JButton("Remove a player");
 		
@@ -67,7 +77,7 @@ public class Setup
 			 */
 			public void actionPerformed(ActionEvent event)
 			{
-				int countPlayers = 3;
+				int countPlayers = 6;
 				Object action = event.getSource();
 				if (action == add)
 				{
@@ -80,22 +90,30 @@ public class Setup
 					{
 						if (countPlayers == 3)
 						{
-							names.add(name4);
-							names.add(slot4);
-							names.validate();
-							System.out.println(countPlayers);
+							name4.setVisible(true);
+							slot4.setVisible(true);
+							name5.setVisible(false);
+							slot5.setVisible(false);
+							name6.setVisible(false);
+							slot6.setVisible(false);
 						}
 						else if (countPlayers == 4)
 						{
-							names.add(name5);
-							names.add(slot5);
-							names.validate();
+							name4.setVisible(true);
+							slot4.setVisible(true);
+							name5.setVisible(true);
+							slot5.setVisible(true);
+							name6.setVisible(false);
+							slot6.setVisible(false);
 						}
 						else if (countPlayers == 5)
 						{
-							names.add(name6);
-							names.add(slot6);
-							names.validate();
+							name4.setVisible(true);
+							slot4.setVisible(true);
+							name5.setVisible(true);
+							slot5.setVisible(true);
+							name6.setVisible(true);
+							slot6.setVisible(true);
 						}
 						countPlayers++;
 					}
@@ -111,19 +129,30 @@ public class Setup
 					{
 						if (countPlayers == 4)
 						{
-							centerPanel.remove(name4);
-							centerPanel.remove(slot4);
-							names.validate();
+							name4.setVisible(false);
+							slot4.setVisible(false);
+							name5.setVisible(false);
+							slot5.setVisible(false);
+							name6.setVisible(false);
+							slot6.setVisible(false);
 						}
 						else if (countPlayers == 5)
 						{
-							centerPanel.remove(name5);
-							centerPanel.remove(slot5);
+							name4.setVisible(true);
+							slot4.setVisible(true);
+							name5.setVisible(false);
+							slot5.setVisible(false);
+							name6.setVisible(false);
+							slot6.setVisible(false);
 						}
 						else if (countPlayers == 6)
 						{
-							centerPanel.remove(name6);
-							centerPanel.remove(slot6);
+							name4.setVisible(true);
+							slot4.setVisible(true);
+							name5.setVisible(true);
+							slot5.setVisible(true);
+							name6.setVisible(false);
+							slot6.setVisible(false);
 						}
 						countPlayers--;
 					}
@@ -133,10 +162,9 @@ public class Setup
 		
 		add.addActionListener(new PlayerListener());
 		remove.addActionListener(new PlayerListener());
-		centerPanel.add(add);
-		centerPanel.add(remove);
+		topPanel.add(add);
+		topPanel.add(remove);
 		centerPanel.add(names);
-		
 		
 //		String[] choices = {" ", "3", "4", "5", "6"}; 
 //		JComboBox<String> numPlayers = new JComboBox<String>(choices);
@@ -161,16 +189,18 @@ public class Setup
 				{
 					System.out.println("Go to game screen");
 					frame.setVisible(false);
-					Gameboard.init();
+//					Gameboard.init();
 				}
 			}
 		} //end of ButtonListener
 		
 		start.addActionListener(new StartListener());
+		botPanel.add(start);
 		
-		panel.add(botPanel, BorderLayout.SOUTH);
-		panel.add(centerPanel, BorderLayout.CENTER);
-		frame.add(panel);
+		setupPanel.add(topPanel);
+		setupPanel.add(centerPanel);
+		setupPanel.add(botPanel);
+		frame.add(setupPanel);
 		
 		frame.setVisible(true);
 	}

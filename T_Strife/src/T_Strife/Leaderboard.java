@@ -37,7 +37,7 @@ public class Leaderboard extends Scoreboard {
 	public static void main(String[] args) //TEMPORARY FOR TESTING
 	{
 		Leaderboard l = new Leaderboard("leaderboard.txt");
-		l.displayLeaderBoard(null);
+//		l.displayLeaderBoard(null);
 	}
 	public Leaderboard(String fileName) {
 		this.fileName = fileName;

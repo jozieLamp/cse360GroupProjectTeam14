@@ -12,6 +12,8 @@ public abstract class Player
 		score = 0;
 	}
 	
+	abstract String getType();
+	
 	public String getName()
 	{
 		return name;

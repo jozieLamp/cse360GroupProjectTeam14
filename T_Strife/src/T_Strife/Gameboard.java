@@ -3,15 +3,18 @@ package T_Strife;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class Gameboard 
 {
-	public Gameboard()
+	public Gameboard(ArrayList<Player> players)
 	{
 		JFrame.setDefaultLookAndFeelDecorated(true);
-		//Not sure what you wanted to do w/ this Ricky
 		JFrame frame = new JFrame();
 		frame.setSize(800, 400);
+		
+		JPanel scorePanel = new JPanel(new GridLayout(players.size()+ 1, 3));
+		Scoreboard scoreboard = new GameScoreboard(players, scorePanel);
 		
 		JPanel grid = new JPanel(new GridBagLayout());
 		JPanel panel = new JPanel();
@@ -42,18 +45,30 @@ public class Gameboard
 //		panel.add(rolled1);
 //		panel.add(rolled2);
 		
-		frame.add(panel);
+		JButton buttonFirstRoll = new JButton("Roll Score Die");
+		JButton buttonSecondRoll = new JButton("Roll Condition Die");
+		JPanel buttonPanel = new JPanel(new GridLayout(2, 1));
+		buttonPanel.add(buttonFirstRoll);
+		buttonPanel.add(buttonSecondRoll);
+		
+		
+		JPanel gamePanel = new JPanel(new GridLayout(1, 2));
+		
+		gamePanel.add(buttonPanel);
+		gamePanel.add(scorePanel);
+		
+		frame.add(gamePanel);
 		frame.setVisible(true);
 		
 		boolean winner = false;
-		while (!winner)
-		{
-			rollDie(frame, 1);
-			//rollMessage(frame, 1, );
-			// 1st die roll happens. Then:
-			rollDie(frame, 2);
-			//rollMessage(frame, 2, dice.getDie2());
-		}
+//		while (!winner)
+//		{
+//			rollDie(frame, 1);
+//			//rollMessage(frame, 1, );
+//			// 1st die roll happens. Then:
+//			rollDie(frame, 2);
+//			//rollMessage(frame, 2, dice.getDie2());
+//		}
 	}
 	
 	/**
@@ -137,11 +152,6 @@ public class Gameboard
 		{
 			e.printStackTrace();
 		}
-	}
-	
-	public static void init()
-	{
-		new Gameboard();
 	}
 	
 	

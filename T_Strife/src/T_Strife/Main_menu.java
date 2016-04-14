@@ -10,9 +10,11 @@
 	{
 		public Main_menu() 
 		{
-			JFrame.setDefaultLookAndFeelDecorated(true);
+//			JFrame.setDefaultLookAndFeelDecorated(true);
 			JFrame frame = new JFrame("Tendentious Strife - Main Menu");
 			frame.setSize(400, 400);
+			
+			Leaderboard board = new Leaderboard("leaderboard.txt");
 			
 			JPanel panel = new JPanel(new BorderLayout());
 			JLabel name = new JLabel("TENDENTIOUS STRIFE");
@@ -51,8 +53,7 @@
 					}
 					if (action == leader)
 					{
-						frame.setVisible(false);
-						//leaderboard.init();
+						board.displayLeaderBoard(null);
 					}
 					if (action == exit)
 						System.exit(0);
