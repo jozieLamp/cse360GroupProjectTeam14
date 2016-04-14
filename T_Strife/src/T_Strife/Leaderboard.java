@@ -17,12 +17,14 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+/**
+ * Class to represent the leaderboard. Allows one to add, view, search, retrieve, and store scores.
+ * @author Richard Tuznik (PIN 825)
+ */
 public class Leaderboard extends Scoreboard {
 	private String fileName;
-	// protected ArrayList<Score> scores;
 	private int playerType; // 0 = all, 1 = disadvantaged, 2 = normal players only
 	
-	//private String[] items = { "All", "Disadvantaged", "Normal" }; // 0 = all, 1= disadvantaged, 2 = normal players only
 	private JTextField searchField = new JTextField("");
 	private JButton confirmSearchButton = new JButton("Search Player");
 	private JPanel scorePanel;
@@ -34,11 +36,16 @@ public class Leaderboard extends Scoreboard {
 
 	private JRadioButtonMenuItem butAll, butDis, butNorm;
 
-	public static void main(String[] args) //TEMPORARY FOR TESTING
+	/*public static void main(String[] args) //TEMPORARY FOR TESTING
 	{
 		Leaderboard l = new Leaderboard("leaderboard.txt");
 		l.displayLeaderBoard(null);
-	}
+	}*/
+	
+	/**
+	 * Leaderboard - Creates a new leaderboard (this is a popup dialog)
+	 * @param fileName - The location of the leaderboard text file (leaderboard.txt)
+	 */
 	public Leaderboard(String fileName) {
 		this.fileName = fileName;
 		playerType = 0;
@@ -46,11 +53,12 @@ public class Leaderboard extends Scoreboard {
 		getStoredLeaderboard();
 	}
 
-	private void getStoredLeaderboard() {
+	/**
+	 * getStoredLeaderboard - Retrieves the data in the text file and puts it into an arrayList of type Score
+	 */
+	public void getStoredLeaderboard() {
 		try {
-			// This writes to the "leaderboard.txt" file
 			File scoreFile = new File(fileName);
-			//System.out.println(scoreFile.getAbsolutePath());
 			FileReader scoreRead = new FileReader(scoreFile);
 			BufferedReader br = new BufferedReader(scoreRead);
 
@@ -75,8 +83,12 @@ public class Leaderboard extends Scoreboard {
 		}
 	}
 
+	/**
+	 * addToLeaderboard - Adds the players' scores to the leaderboard and then adds the leaderboard scores to the text file so that it can be saved
+	 * @param players The new players to be added to the leaderboard
+	 * @param value The current turn number
+	 */
 	public void addToLeaderboard(ArrayList<Player> players, int turn) {
-		//if (scores == null)
 		getStoredLeaderboard();
 
 		ArrayList<Score> newScores = new ArrayList<Score>();
@@ -95,8 +107,10 @@ public class Leaderboard extends Scoreboard {
 						|| (score.Points == currentScore.Points && score.NumberTurns < currentScore.NumberTurns)
 						|| (score.Points == currentScore.Points
 								&& score.NumberTurns == currentScore.NumberTurns && score.Name
-								.compareTo(currentScore.Name) <= 0)) {
+								.compareTo(currentScore.Name) <= 0))
+				{
 					add = true;
+					index--; //To counteract the next index++
 				}
 				index++;
 			}
@@ -107,9 +121,11 @@ public class Leaderboard extends Scoreboard {
 		storeLeaderboard();
 	}
 
-	private void storeLeaderboard() {
+	/**
+	 * storeLeaderboard - Writes the current score arraylist to the textfile
+	 */
+	public void storeLeaderboard() {
 		try {
-			// This writes to the "leaderboard.txt" file
 			File scoreFile = new File(fileName);
 			FileWriter scoreWrite = new FileWriter(scoreFile);
 			BufferedWriter bw = new BufferedWriter(scoreWrite);
@@ -126,8 +142,10 @@ public class Leaderboard extends Scoreboard {
 		}
 	}
 
-	// Pass in the JFrame for the game so I can create a popup
-	public void displayLeaderBoard(JFrame gameFrame) // Parameter may be unnecessary
+	/**
+	 * displayLeaderBoard - Creates the GUI representation of the leaderboard
+	 */
+	public void displayLeaderBoard()
 	{
 		//JMenu containerMenu = new JMenu("Change Settings");
 		JMenu playerTypeSubMenu = new JMenu("Player Type");
@@ -135,13 +153,6 @@ public class Leaderboard extends Scoreboard {
 		butAll.setSelected(true);
 		butDis = new JRadioButtonMenuItem("Disadvantaged Players");
 		butNorm = new JRadioButtonMenuItem("Normal Players");
-		
-		//Colors
-		/*butRestart.setBackground(Color.blue);
-		butRestart.setForeground(Color.white);
-		buttonListener = new ButtonListener();
-		butRestart.addActionListener(buttonListener);*/
-		
 		
 		//Event Listeners
 		buttonListener = new ButtonListener();
@@ -225,8 +236,6 @@ public class Leaderboard extends Scoreboard {
 
 		}
 		JScrollPane scrollPane = new JScrollPane(scorePanel);
-		//scrollPane.add(scorePanel);
- 
 
 		JPanel optionPanel = new JPanel(new GridLayout(1, 3));
 		JMenuBar playerTypeBar = new JMenuBar();
@@ -239,36 +248,19 @@ public class Leaderboard extends Scoreboard {
 
 		basePanel.add(scrollPane, BorderLayout.CENTER);
 		basePanel.add(optionPanel, BorderLayout.SOUTH);
-		
-		/*
-		 * JTextArea myTArea= new JTextArea(17, 20);
-JScrollPane myScroller=new JScrollPane( myTArea);
-String longText="jadda jadda... jadda jadda";
-myTArea.setText(longText);
-JOptionPane.show...(myParentContainer, myScroller, myTitle, JOptionPane.PLAIN_MESSAGE);
-		 */
 
-		//JTextArea textArea = new JTextArea(20, 20);
-		//basePanel.add()
-		//textArea.add(basePanel); //Incorrect
-		//basePanel.setSize(100, 100);
-		//JOptionPane.showConfirmDialog(null, basePanel, "Leaderboard", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
-		//JOptionPane.showMessageDialog(basePanel,OptionPane.PLAIN_MESSAGE);
-		//JOptionPane.showMessageDialog(basePanel, "Leaderboard");
-		//JOptionPane.showMessageDialog(parentComponent, message);
-		//JOptionPane.showOptionDialog(basePanel,"","Leaderboard", JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE, null, new Object[]{}, null);
-		/*
-		 * if (result == JOptionPane.OK_OPTION) {
-		 * System.out.println(combo.getSelectedItem() + " " + field1.getText() +
-		 * " " + field2.getText()); } else { System.out.println("Cancelled"); }
-		 */
 		JDialog leaderboardPopUp = new JDialog(new JFrame(), "Leaderboard");
 		leaderboardPopUp.add(basePanel);
 		leaderboardPopUp.setVisible(true);
         leaderboardPopUp.setSize(700, 400);
 	}
 
-	private int searchScore(String name) 
+	/**
+	 * searchScoreIndex - Finds the index of the score with the desired name
+	 * @param name The name of the desired player's score
+	 * @return The index of the score with the desired player name
+	 */
+	public int searchScoreIndex(String name) 
 	{
 		for(int index = 0; index < scores.size(); index++)
 		{
@@ -282,7 +274,7 @@ JOptionPane.show...(myParentContainer, myScroller, myTitle, JOptionPane.PLAIN_ME
 
 	private class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			int desiredScoreIndex = searchScore(searchField.getText());
+			int desiredScoreIndex = searchScoreIndex(searchField.getText());
 			if(desiredScoreIndex != -1)
 			{
 				scorePanel.removeAll();
@@ -347,11 +339,9 @@ JOptionPane.show...(myParentContainer, myScroller, myTitle, JOptionPane.PLAIN_ME
 				scorePanel.add(turnsLabel);
 				scorePanel.add(disadvLabel);
 				
-				//scorePanel.revalidate();
-				//scorePanel.repaint();
 				scorePanel.validate();
 			}
-			else //Try to condense this code with a method later
+			else
 			{
 				System.out.println("Player not found.");
 				
