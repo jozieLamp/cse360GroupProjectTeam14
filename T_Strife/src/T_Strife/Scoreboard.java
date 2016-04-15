@@ -5,8 +5,16 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
+/**
+ * Class to represent a scoreboard. This class holds an ArrayList of Scores which contains players' points, name, type, and turns.
+ * @author Richard Tuznik (PIN 825)
+ */
 public abstract class Scoreboard 
 {
+	/**
+	 * Class to represent a player's score. Has points, name, type, and turns. Treat like a struct
+	 * @author Richard Tuznik (PIN 825)
+	 */
 	protected class Score
 	{
 		public int Points;
@@ -22,12 +30,12 @@ public abstract class Scoreboard
 		}
 	}
 	protected ArrayList<Score> scores;
-	public Scoreboard()
-	{
-		
-	}
 	
-	
+	/**
+	 * getScore - Gets the score of the player with the desired name
+	 * @param aName The name of the desired player
+	 * @return The score of the desired player
+	 */
 	public Score getScore(String aName)
 	{
 		for(Score score : scores)
