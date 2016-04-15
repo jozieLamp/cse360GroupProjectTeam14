@@ -104,6 +104,5 @@ public class PlayerTest {
 		dPlayer.updateScore(150);
 		assertEquals(150, dPlayer.getScore());
 	}
-
 }
 
