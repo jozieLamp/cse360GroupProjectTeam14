@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+/**
+ * Gameboard - Class that displays the actual game board. Displays the scoreboard.
+ *
+ * @author - Ellery Leung (Pin 507)
+ */
 public class Gameboard 
 {
 	JFrame frame;
@@ -21,6 +26,11 @@ public class Gameboard
 	int dieOne;
 	int dieTwo;
 	
+	/**
+	 * Gameboard - constructor for the Gameboard class
+	 *
+	 * @players Takes in the array of players to display names.
+	 */
 	public Gameboard(Player[] players)
 	{
 		JFrame.setDefaultLookAndFeelDecorated(true);
@@ -191,7 +201,7 @@ public class Gameboard
 	}
 	
 	/**
-	 * 
+	 * Wait - Method used to make players wait a few seconds after action.
 	 */
 	public static void Wait()
 	{
@@ -209,20 +219,38 @@ public class Gameboard
 	{
 		/**
 		 * ButtonListener - Takes an action based on the button pressed.
-		 * @param event 
+		 * @param event Checks whether the button pressed was for the first or second roll. 
 		 */
 		public void actionPerformed(ActionEvent event)
 		{
 			Object action = event.getSource();
 			if (action == buttonFirstRoll)
 			{
-				rollFirstDie(frame, );
-				
+				rollFirstDie(frame, game.getDieOne());
 			}
 			if (action == buttonSecondRoll)
 			{
-				
-			}
+				if (game.getDieTwo() == 1)
+				{
+					rollSplit();
+				}
+				if (game.getDieTwo() == 2)
+				{
+					rollSteal();
+				}
+				if (game.getDieTwo() == 3)
+				{
+					rollMult();
+				}
+				if (game.getDieTwo() == 4)
+				{
+					rollLose();
+				}
+				if (game.getDieTwo() == 5)
+				{
+					rollTax();
+				}
+			}	
 		}
 	} //end of ButtonListener
 }

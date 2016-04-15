@@ -29,8 +29,16 @@ public class Controller {
 		return game.allPlayers;
 	}
 	
+	public static int getDieOne(GameData game)
+	{
+		return game.dieOne;
+	}
 
-	
+	public static int getDieTwo(GameData game)
+	{
+		retunr game.dieTwo;
+	}
+
 	public static GameData game(GameData game)
 	{
 		boolean gameWon = false;
@@ -114,7 +122,6 @@ public class Controller {
 	}
 	
 }
-
 
 class GameData
 {

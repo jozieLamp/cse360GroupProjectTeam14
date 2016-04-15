@@ -7,6 +7,12 @@ import java.awt.event.*;
 import java.util.Random;
 import java.util.Random;
 
+/**
+ * Setup - Sets up the game after pressing start, but before game initialization
+ * Finds out how many players, along with their names input.
+ *
+ * @author - Ellery Leung (Pin 507)
+ */
 public class Setup
 {
 	JFrame frame;
@@ -118,26 +124,22 @@ public class Setup
 		
 		frame.setVisible(true);
 	}
-	
-	public int incrNumPlayers(int numPlayers)
-	{
-		return numPlayers++;
-	}
-	
-	public int decrNumPlayers(int numPlayers)
-	{
-		return numPlayers--;
-	}
-	
+
+	/**
+	 * init - Instantiates Setup.
+	 */	
 	public static void init()
 	{
 		new Setup();
 	}
 	
+	/**
+	 * StartListener - Button Listener class to find out when they press start
+	 */
 	private class StartListener implements ActionListener
 	{
 		/**
-		 * ButtonListener - Takes an action based on the button pressed.
+		 * actionPerformed - Takes an action based on the button pressed.
 		 * @param event Only option here is start - will begin the game.
 		 */
 		public void actionPerformed(ActionEvent event)
@@ -169,6 +171,9 @@ public class Setup
 		}
 	} //end of ButtonListener
 	
+	/**
+	 * PlayerListener - Button Listener class to check for when a user adds or removes a player.
+	 */
 	private class PlayerListener implements ActionListener
 	{
 		/**
@@ -263,5 +268,4 @@ public class Setup
 			}
 		}
 	} //end of ButtonListener
-
 }

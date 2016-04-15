@@ -7,14 +7,20 @@
 	import java.util.Random;
 	import java.util.Scanner;
 	
-	
+	/**
+	 * Main_menu - Class that displays the main menu. Options are to start, view leaderboard, and quit.
+	 *
+	 * @author - Ellery Leung (Pin 507)
+	 */
 	public class Main_menu
 	{
 		JFrame frame;
 		JButton start, leader, exit;
 		Leaderboard board;
 		
-		
+		/**
+		 * Main_menu - Constructor for main menu
+		 */
 		public Main_menu() 
 		{
 //			JFrame.setDefaultLookAndFeelDecorated(true);
@@ -55,11 +61,17 @@
 			frame.setVisible(true);
 		}
 		
+		/**
+		 * Main - Begins the main menu GUI
+		 */
 		public static void main(String[] args)
 		{
 			new Main_menu();
 		}
-
+		
+		/**
+		 * ButtonListener - Button Listener class to detect which button is pressed - Start, View Leaderboard, or Exit.
+		 */
 		private class ButtonListener implements ActionListener
 		{
 			/**
