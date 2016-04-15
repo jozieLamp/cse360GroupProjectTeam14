@@ -80,6 +80,7 @@ public class Gameboard
 		JLabel display;
 		JOptionPane roll = new JOptionPane();
 		
+		//THIS PART HAS PROBLEMS COMMENT HERE FOR FIXING PROBLEMS
 		game.dieOne;
 		game.dieTwo;
 		
