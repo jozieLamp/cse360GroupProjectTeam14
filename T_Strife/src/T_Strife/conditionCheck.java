@@ -1,11 +1,20 @@
 package T_Strife;
 
 import java.util.Scanner;
+/**
+ * Class to check what condition is called based on the number rolled on the condition dice
+ * Performs the action called to continue game play.
+ */
 
 public class conditionCheck 
 {
 	static Scanner scan = new Scanner(System.in);
 	
+	/**
+	 * Split action in which two player add all of their points together and split them evenly
+	 * @param playerlist list of players in game currently
+	 * @param currentPlayer, current player who is calling the split condition
+	 */
 	public static Player[] split(Player[] playerList, int currentPlayer)
 	{
 		int iterator = 0;
@@ -46,7 +55,13 @@ public class conditionCheck
 	}
 	
 	
-	
+	/**
+	 * Steal action in which a player steals the number of points rolled on their number dice from another player
+	 * @param playerList list of players in the game
+	 * @param currentPlayer currentplayer who rolled this action
+	 * @param rollOne the number rolled on the dice
+	 * @param numPlayers the total number of players currently playing the game
+	 */
 	public static Player[] steal(Player[] playerList, int currentPlayer, int rollOne, int numPlayers)
 	{
 		int iterator = 0;
@@ -93,7 +108,11 @@ public class conditionCheck
 	}
 	
 	
-	
+	/**
+	 * Multiply action in which the player multiplies the number of points rolled by 1.5x and addes it to their score
+	 * @param playerList the list of players playing the game
+	 * @param currentPlayer the current player who rolled the action
+	 */
 	public static Player[] multiply(Player[] playerList, int currentPlayer)
 	{
 		int playOneScore = playerList[currentPlayer].getScore();
@@ -104,7 +123,12 @@ public class conditionCheck
 	}
 
 	
-	
+	/**
+	 * Lose action in which the player loses the number of points rolled on the dice
+	 * @param playerList the list of players
+	 * @param currentPlayer the current player who rolled the action
+	 * @param rollOne the number rolled on the number dice
+	 */
 	public static Player[] lose(Player[] playerList, int currentPlayer, int rollOne)
 	{
 		int playOneScore = playerList[currentPlayer].getScore();
@@ -114,6 +138,12 @@ public class conditionCheck
 		return playerList;
 	}
 	
+	/**
+	 * Tax action in which the player gains 10% of each persons number of points
+	 * @param playerList the list of players
+	 * @param currentPlayer the current player whos turn it is
+	 * @param numPlayers the number of players playing the game
+	 */
 	public static Player[] tax(Player[] playerList, int currentPlayer, int numPlayers)
 	{
 		int taxOnCurrent = 0;
@@ -138,6 +168,4 @@ public class conditionCheck
 		
 		return playerList;
 	}
-	
-	
 }
