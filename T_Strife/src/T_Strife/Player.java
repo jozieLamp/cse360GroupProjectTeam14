@@ -1,6 +1,5 @@
 package T_Strife;
 
-
 public abstract class Player 
 {
 	protected  String name;
