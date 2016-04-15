@@ -58,6 +58,7 @@ public class GameScoreboard extends Scoreboard
 	 */
 	public void updateScoreBoard()
 	{
+		scorePanel.removeAll(); 
 		JLabel rLabel = new JLabel("Rank");
 		JLabel nLabel = new JLabel("Name");
 		JLabel pLabel = new JLabel("Points");
