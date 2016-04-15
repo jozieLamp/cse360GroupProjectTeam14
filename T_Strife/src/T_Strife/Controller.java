@@ -1,13 +1,26 @@
 package T_Strife;
 
 public class Controller {
-
+	
+	/**
+	 * setNumPlayers - Takes the value of totalPlayers, and stores it in GameData.
+	 *
+	 * @param totalPlayers Total number of players
+	 * @param game object of GameData that stores many values
+	 */
 	public static void setNumPlayers(int totalPlayers, GameData game)
 	{	
 		game.numPlayers = totalPlayers;
 	}
 	
-	
+	/**
+	 * setPlayers - Sets the value for each player as to whether they are a Normal or Disadvantaged player.
+	 *		Also instantiates each Player
+	 *
+	 *@param playNames - String array that has each player's name
+	 *@param disAdvanIndex - Index of the disadvantaged player
+	 *@param game - object of GameData that stores values
+	 */
 	public static void setPlayers(String[] playNames, int disAdvanIndex, GameData game)
 	{
 		for(int i = 0;i<game.numPlayers; i++)
@@ -19,26 +32,52 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * setWinPoints - Method that sets the point limit (for victory).
+	 *
+	 *@param pointLimit - Integer value that is the point limit to win
+	 *@param game - object of GameData that stores values
+	 */
 	public static void setWinPoints(int pointLimit, GameData game)
 	{
 		game.pointCap = pointLimit;
 	}
 	
+	/**
+	 * getPlayers - Returns the array of players
+	 *
+	 *@param game - object of GameData that is used to help return the array.
+	 */
 	public static Player[] getPlayers(GameData game)
 	{
 		return game.allPlayers;
 	}
 	
+	/**
+	 * getDieOne - Method that returns the value of the first die.
+	 *
+	 *@param game - object of GameData to return the first die value.
+	 */
 	public static int getDieOne(GameData game)
 	{
 		return game.dieOne;
 	}
 
+	/**
+	 * getDieTwo - Method that returns the value of the second die.
+	 *
+	 *@param game - object of GameData to return the second die value.
+	 */
 	public static int getDieTwo(GameData game)
 	{
 		retunr game.dieTwo;
 	}
-
+	
+	/**
+	 * game - Controls the logic of the game
+	 *
+	 *@param game - Used for accessing data values in our game
+	 */
 	public static GameData game(GameData game)
 	{
 		boolean gameWon = false;
@@ -123,6 +162,9 @@ public class Controller {
 	
 }
 
+/**
+ * GameData - Class that stores many values to be accessed through methods.
+ */
 class GameData
 {
 	public int numPlayers = 0;
