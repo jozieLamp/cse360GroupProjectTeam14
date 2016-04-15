@@ -226,29 +226,29 @@ public class Gameboard
 			Object action = event.getSource();
 			if (action == buttonFirstRoll)
 			{
-				rollFirstDie(frame, game.getDieOne());
+				rollFirstDie(frame, game.gameDice.getDie1());
 			}
 			if (action == buttonSecondRoll)
 			{
 				if (game.getDieTwo() == 1)
 				{
-					rollSplit();
+					rollSplit(frame);
 				}
 				if (game.getDieTwo() == 2)
 				{
-					rollSteal();
+					rollSteal(frame);
 				}
 				if (game.getDieTwo() == 3)
 				{
-					rollMult();
+					rollMult(frame);
 				}
 				if (game.getDieTwo() == 4)
 				{
-					rollLose();
+					rollLose(frame);
 				}
 				if (game.getDieTwo() == 5)
 				{
-					rollTax();
+					rollTax(frame);
 				}
 			}	
 		}
