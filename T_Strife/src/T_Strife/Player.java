@@ -9,7 +9,7 @@ public abstract class Player
 	protected  String name;
 	protected int score;
 	protected int currentDie;
-	protected int currentConditionDie;
+	protected int currentConditionDie; 
 	
 	/**
 	 * Constructor to create a player
