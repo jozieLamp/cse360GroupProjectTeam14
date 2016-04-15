@@ -8,6 +8,8 @@ public abstract class Player
 {
 	protected  String name;
 	protected int score;
+	protected int currentDie;
+	protected int currentConditionDie;
 	
 	/**
 	 * Constructor to create a player
@@ -17,6 +19,8 @@ public abstract class Player
 	{
 		this.name = name;
 		score = 0;
+		currentDie = -1;
+		currentConditionDice = -1;
 	}
 	
 	/** Method to return the type of a player */
@@ -56,5 +60,41 @@ public abstract class Player
 	public void updateScore(int newScore)
 	{
 		score = newScore;
+	}
+	
+	/**
+	 * Return the number dice currenlty rolled
+	 * @return the currentDie number
+	 */
+	public int getCurrentDieRoll()
+	{
+		return currentDie;
+	}
+	
+	/**
+	 * Update the current number dice the player has rolled
+	 * @param newCurrentDie the new dice roll number
+	 */
+	public void setCurrentDieRoll(int newCurrentDie)
+	{
+		currentDie = newCurrentDie;
+	}
+	
+	/**
+	 * Return the condition dice currenlty rolled
+	 * @return the currentDie number condition
+	 */
+	public int getCurrentConditionDieRoll()
+	{
+		return currentConditionDie;
+	}
+	
+	/**
+	 * Update the current condition dice the player has rolled
+	 * @param newCurrentDie the new dice roll condition number
+	 */
+	public void setCurrentConditionDieRoll(int newCurrentConditionDie)
+	{
+		currentConditionDie = newCurrentConditionDie;
 	}
 }

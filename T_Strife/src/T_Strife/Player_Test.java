@@ -104,5 +104,93 @@ public class PlayerTest {
 		dPlayer.updateScore(150);
 		assertEquals(150, dPlayer.getScore());
 	}
+	
+	@Test
+	//Test current dice roll return method
+	public void testGetCurrentDieRoll()
+	{
+		NormalPlayer nPlayer = new NormalPlayer("Bob");
+		DisadvantagedPlayer dPlayer = new DisadvantagedPlayer("Joe");
+		
+		assertEquals(-1, nPlayer.getCurrentDieRoll());
+		assertEquals(-1, dPlayer.getCurrentDieRoll());
+		
+		nPlayer.setCurrentDieRoll(3);
+		assertEquals(3, nPlayer.getCurrentDieRoll());
+		
+		nPlayer.setCurrentDieRoll(6);
+		assertEquals(6, nPlayer.getCurrentDieRoll());
+		
+		dPlayer.setCurrentDieRoll(2);
+		assertEquals(2, dPlayer.getCurrentDieRoll());
+		
+		dPlayer.setCurrentDieRoll(4);
+		assertEquals(4, dPlayer.getCurrentDieRoll());
+	}
+	
+	@Test
+	//Test the set of the current dice roll
+	public void testSetCurrentDieRoll()
+	{
+		NormalPlayer nPlayer = new NormalPlayer("Bob");
+		DisadvantagedPlayer dPlayer = new DisadvantagedPlayer("Joe");
+		
+		nPlayer.setCurrentDieRoll(3);
+		assertEquals(3, nPlayer.getCurrentDieRoll());
+		
+		nPlayer.setCurrentDieRoll(6);
+		assertEquals(6, nPlayer.getCurrentDieRoll());
+		
+		dPlayer.setCurrentDieRoll(2);
+		assertEquals(2, dPlayer.getCurrentDieRoll());
+		
+		dPlayer.setCurrentDieRoll(4);
+		assertEquals(4, dPlayer.getCurrentDieRoll());
+	}
+	
+	@Test
+	//test the condition dice roll set method
+	public void testSetCurrentCondtionDiceRoll()
+	{
+		NormalPlayer nPlayer = new NormalPlayer("Bob");
+		DisadvantagedPlayer dPlayer = new DisadvantagedPlayer("Joe");
+		
+		nPlayer.setCurrentConditionDieRoll(3);
+		assertEquals(3, nPlayer.getCurrentConditionDieRoll());
+		
+		nPlayer.setCurrentConditionDieRoll(6);
+		assertEquals(6, nPlayer.getCurrentConditionDieRoll());
+		
+		dPlayer.setCurrentConditionDieRoll(2);
+		assertEquals(2, dPlayer.getCurrentConditionDieRoll());
+		
+		dPlayer.setCurrentConditionDieRoll(4);
+		assertEquals(4, dPlayer.getCurrentConditionDieRoll());
+	}
+	
+	@Test
+	//test get current condition die roll method
+	public void testGetCurrentConditionDieRoll()
+	{
+		NormalPlayer nPlayer = new NormalPlayer("Bob");
+		DisadvantagedPlayer dPlayer = new DisadvantagedPlayer("Joe");
+		
+		assertEquals(-1, nPlayer.getCurrentConditionDieRoll());
+		assertEquals(-1, dPlayer.getCurrentConditionDieRoll());
+		
+		nPlayer.setCurrentConditionDieRoll(3);
+		assertEquals(3, nPlayer.getCurrentConditionDieRoll());
+		
+		nPlayer.setCurrentConditionDieRoll(6);
+		assertEquals(6, nPlayer.getCurrentConditionDieRoll());
+		
+		dPlayer.setCurrentConditionDieRoll(2);
+		assertEquals(2, dPlayer.getCurrentConditionDieRoll());
+		
+		dPlayer.setCurrentConditionDieRoll(4);
+		assertEquals(4, dPlayer.getCurrentConditionDieRoll());
+	}
+	
+	
 }
 
