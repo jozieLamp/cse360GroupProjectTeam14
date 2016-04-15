@@ -98,5 +98,6 @@ public class GameScoreboard extends Scoreboard
 			scorePanel.add(nameLabel);
 			scorePanel.add(pointsLabel);
 		}
+		scorePanel.validate();
 	}
 }
