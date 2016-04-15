@@ -1,32 +1,56 @@
 package T_Strife;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 public class Gameboard 
 {
-	public Gameboard(ArrayList<Player> players)
+	JFrame frame;
+	ArrayList<Player> playerList;
+	JPanel buttonPanel;
+	JPanel gamePanel;
+	JPanel scorePanel;
+	JButton buttonFirstRoll;
+	JButton buttonSecondRoll;
+	Scoreboard scoreboard;
+	int dieOne;
+	int dieTwo;
+	
+	public Gameboard(Player[] players)
 	{
 		JFrame.setDefaultLookAndFeelDecorated(true);
-		JFrame frame = new JFrame();
+		frame = new JFrame();
 		frame.setSize(800, 400);
 		
-		JPanel scorePanel = new JPanel(new GridLayout(players.size()+ 1, 3));
-		Scoreboard scoreboard = new GameScoreboard(players, scorePanel);
+		playerList = new ArrayList<Player>(Arrays.asList(players));
+		for(int iterator = 0; iterator < playerList.size(); iterator++)
+		{
+			if(playerList.get(iterator) == null)
+				{
+					playerList.remove(iterator);
+					iterator--;
+				}
+		}
 		
-		JPanel grid = new JPanel(new GridBagLayout());
-		JPanel panel = new JPanel();
+		scorePanel = new JPanel(new GridLayout(playerList.size() + 1, 3));
+		scoreboard = new GameScoreboard(playerList, scorePanel);
+		
+//		JPanel grid = new JPanel(new GridBagLayout());
+//		JPanel panel = new JPanel();
 
-		JButton buttonFirstRoll = new JButton("Roll Score Die");
-		JButton buttonSecondRoll = new JButton("Roll Condition Die");
-		JPanel buttonPanel = new JPanel(new GridLayout(2, 1));
+		buttonFirstRoll = new JButton("Roll Score Die");
+		buttonSecondRoll = new JButton("Roll Condition Die");
+		
+		buttonPanel = new JPanel(new GridLayout(2, 1));
 		buttonPanel.add(buttonFirstRoll);
 		buttonPanel.add(buttonSecondRoll);
 		
-		
-		JPanel gamePanel = new JPanel(new GridLayout(1, 2));
+		gamePanel = new JPanel(new GridLayout(1, 2));
 		
 		gamePanel.add(buttonPanel);
 		gamePanel.add(scorePanel);
@@ -34,7 +58,7 @@ public class Gameboard
 		frame.add(gamePanel);
 		frame.setVisible(true);
 		
-		boolean winner = false;
+//		boolean winner = false;
 //		while (!winner)
 //		{
 //			rollDie(frame, 1);
@@ -51,14 +75,18 @@ public class Gameboard
 	 * @param frame Passes the frame through to display over it
 	 * @param type	Selects which die is being rolled (1st or 2nd)
 	 */
-	public static void rollDie(JFrame frame, int type)
+	public static void rollDie(int type, int currentPlayer, GameData game)
 	{
 		JLabel display;
 		JOptionPane roll = new JOptionPane();
+		
+		game.dieOne;
+		game.dieTwo;
+		
 		if (type == 1)
-			roll.showMessageDialog(frame, "It is Player X's turn. Roll your first die!", "First Die Roll", JOptionPane.INFORMATION_MESSAGE);
+			roll.showMessageDialog(new JFrame(), "It is " + game.allPlayers[currentPlayer].getName() + "'s turn. Roll your first die!", "First Die Roll", JOptionPane.INFORMATION_MESSAGE);
 		if (type == 2)
-			roll.showMessageDialog(frame, "Now, roll your second die!", "Second Die Roll", JOptionPane.INFORMATION_MESSAGE);
+			roll.showMessageDialog(new JFrame(), "Now, roll your second die!", "Second Die Roll", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	/**
@@ -83,7 +111,7 @@ public class Gameboard
 	 * 
 	 * @param frame Passes the frame through to display over it
 	 */
-	public static void rollSteal()
+	public static void rollSteal(JFrame frame)
 	{
 		JLabel display;
 		display = new JLabel("\nNumber rolled: 2" +
@@ -100,7 +128,7 @@ public class Gameboard
 	 * 
 	 * @param frame Passes the frame through to display over it
 	 */
-	public static void rollMult()
+	public static void rollMult(JFrame frame)
 	{
 		JLabel display;
 		display = new JLabel("\nNumber rolled: 3" +
@@ -117,7 +145,7 @@ public class Gameboard
 	 * 
 	 * @param frame Passes the frame through to display over it
 	 */
-	public static void rollLose()
+	public static void rollLose(JFrame frame)
 	{
 		JLabel display;
 		display = new JLabel("Number rolled: 4" +
@@ -134,7 +162,7 @@ public class Gameboard
 	 * 
 	 * @param frame Passes the frame through to display over it
 	 */
-	public static void rollTax()
+	public static void rollTax(JFrame frame)
 	{
 		JLabel display;
 		display = new JLabel("Number rolled: 4" +
@@ -162,6 +190,9 @@ public class Gameboard
 		frame.remove(display);
 	}
 	
+	/**
+	 * 
+	 */
 	public static void Wait()
 	{
 		try
@@ -173,4 +204,25 @@ public class Gameboard
 			e.printStackTrace();
 		}
 	}
+	
+	private class ButtonListener implements ActionListener
+	{
+		/**
+		 * ButtonListener - Takes an action based on the button pressed.
+		 * @param event 
+		 */
+		public void actionPerformed(ActionEvent event)
+		{
+			Object action = event.getSource();
+			if (action == buttonFirstRoll)
+			{
+				rollFirstDie(frame, );
+				
+			}
+			if (action == buttonSecondRoll)
+			{
+				
+			}
+		}
+	} //end of ButtonListener
 }
