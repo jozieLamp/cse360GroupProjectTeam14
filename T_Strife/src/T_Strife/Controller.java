@@ -70,7 +70,7 @@ public class Controller {
 	 */
 	public static int getDieTwo(GameData game)
 	{
-		retunr game.dieTwo;
+		return game.dieTwo;
 	}
 	
 	/**

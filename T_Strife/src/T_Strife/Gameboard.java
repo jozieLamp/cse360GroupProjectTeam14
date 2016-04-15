@@ -230,7 +230,7 @@ public class Gameboard
 			}
 			if (action == buttonSecondRoll)
 			{
-				if (game.getDieTwo() == 1)
+				if (game.gameDice.getDie2() == 1)
 				{
 					rollSplit(frame);
 				}

@@ -46,12 +46,12 @@ public class Setup
 	{
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		frame = new JFrame();
+		frame.setSize(400, 400);
 		
 		setupPanel = new JPanel(new GridLayout(3, 1));
 		topPanel = new JPanel(new GridLayout(1, 2));
 		centerPanel = new JPanel();
 		botPanel = new JPanel();
-		frame.setSize(400, 400);
 		
 		name1 = new JLabel("Player 1: ");
 		name1.setSize(50, 20);
@@ -102,18 +102,16 @@ public class Setup
 		add = new JButton("Add a player");
 		remove = new JButton("Remove a player");
 	
-		PlayerListener pl = new PlayerListener();
-		add.addActionListener(pl);
-		remove.addActionListener(pl);
+		PlayerListener playerListen = new PlayerListener();
+		add.addActionListener(playerListen);
+		remove.addActionListener(playerListen);
 		topPanel.add(add);
 		topPanel.add(remove);
+		
 		centerPanel.add(names);
 		
 		start = new JButton("Start Game");
 		start.setBounds(200, 350, 100, 20);
-		botPanel.add(start);
-		
-				
 		start.addActionListener(new StartListener());
 		botPanel.add(start);
 		
@@ -169,7 +167,7 @@ public class Setup
 				Controller.game(game);
 			}
 		}
-	} //end of ButtonListener
+	} //end of StartListener
 	
 	/**
 	 * PlayerListener - Button Listener class to check for when a user adds or removes a player.
@@ -200,7 +198,6 @@ public class Setup
 						slot5.setVisible(false);
 						name6.setVisible(false);
 						slot6.setVisible(false);
-//						countPlayers = 4;
 					}
 					else if (countPlayers == 4)
 					{
@@ -210,7 +207,6 @@ public class Setup
 						slot5.setVisible(true);
 						name6.setVisible(false);
 						slot6.setVisible(false);
-//						countPlayers = 5;
 					}
 					else if (countPlayers == 5)
 					{
@@ -241,7 +237,6 @@ public class Setup
 						slot5.setVisible(false);
 						name6.setVisible(false);
 						slot6.setVisible(false);
-//						countPlayers = 3;
 					}
 					else if (countPlayers == 5)
 					{
@@ -251,7 +246,6 @@ public class Setup
 						slot5.setVisible(false);
 						name6.setVisible(false);
 						slot6.setVisible(false);
-//						countPlayers = 4;
 					}
 					else if (countPlayers == 6)
 					{
@@ -261,7 +255,6 @@ public class Setup
 						slot5.setVisible(true);
 						name6.setVisible(false);
 						slot6.setVisible(false);
-//						countPlayers = 5;
 					}
 					countPlayers--;
 				}

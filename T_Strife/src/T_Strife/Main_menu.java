@@ -23,17 +23,18 @@
 		 */
 		public Main_menu() 
 		{
-//			JFrame.setDefaultLookAndFeelDecorated(true);
+			JFrame.setDefaultLookAndFeelDecorated(true);
 			frame = new JFrame("Tendentious Strife - Main Menu");
 			frame.setSize(400, 400);
 			
 			Leaderboard board = new Leaderboard("leaderboard.txt");
 			
-			JPanel panel = new JPanel(new BorderLayout());
+			JPanel mainPanel = new JPanel(new GridLayout(2, 1));
+			JPanel topPanel = new JPanel();
+			
 			JLabel name = new JLabel("TENDENTIOUS STRIFE");
 			name.setBounds(200, 50, 100, 20);
-			panel.add(name, BorderLayout.NORTH);
-			
+			topPanel.add(name);
 			
 			JPanel centerPanel = new JPanel(new GridLayout(3, 1));
 			
@@ -43,9 +44,7 @@
 			leader.setBounds(200, 250, 100, 20);
 			exit = new JButton("Exit");
 			exit.setBounds(200, 300, 100, 20);
-//			buttons.add(start);
-//			buttons.add(leader);
-//			buttons.add(exit);
+			
 			centerPanel.add(start);
 			centerPanel.add(leader);
 			centerPanel.add(exit);
@@ -54,10 +53,10 @@
 			leader.addActionListener(new ButtonListener());
 			exit.addActionListener(new ButtonListener());
 	
-//			frame.add(buttons);
-			panel.setBounds(200, 50, 100, 20);
-			frame.add(panel);
-			frame.add(centerPanel);
+			topPanel.setBounds(200, 50, 100, 20);
+			mainPanel.add(topPanel);
+			mainPanel.add(centerPanel);
+			frame.add(mainPanel);
 			frame.setVisible(true);
 		}
 		
@@ -88,7 +87,7 @@
 				}
 				if (action == leader)
 				{
-					board.displayLeaderBoard(null);
+					board.displayLeaderBoard();
 				}
 				if (action == exit)
 					System.exit(0);
