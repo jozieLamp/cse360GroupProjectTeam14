@@ -1,5 +1,11 @@
 package T_Strife;
 
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+
 public class Controller {
 	
 	/**
@@ -78,7 +84,7 @@ public class Controller {
 	 *
 	 *@param game - Used for accessing data values in our game
 	 */
-	public static GameData game(GameData game)
+	public static GameData game(GameData game, JFrame frame, GameScoreboard gameScoreboard)
 	{
 		boolean gameWon = false;
 		
@@ -109,43 +115,48 @@ public class Controller {
 				
 				// play animation, whatever we decide on an transition between rolls
 				
+				//Debug
 				System.out.println("You rolled a " + game.dieOne + "on the score dice");
+				
+				Gameboard.rollFirstDie(frame, game.dieOne, game, gameScoreboard);
 				
 				// animation
 				
 				System.out.println("You rolled a " + game.dieTwo + "on the condition dice");
 				
 				
+				//Gameboard.rollSECOND
+				
 				switch(game.dieTwo)
 				{
 				case 1: // Split
 
 					game.allPlayers = conditionCheck.split(game.allPlayers, currentPlayer);
-
+					Gameboard.rollSplit(frame);
 					break;
 				
 				case 2: // Steal
 
 					game.allPlayers = conditionCheck.steal(game.allPlayers, currentPlayer, game.dieOne, game.numPlayers);
-
+					Gameboard.rollSteal(frame);
 					break;
 				
 				case 3: // Multiply
 
 					game.allPlayers = conditionCheck.multiply(game.allPlayers, currentPlayer);
-
+					Gameboard.rollMult(frame);
 					break;
 				
 				case 4: // Lose Points
 
 					game.allPlayers = conditionCheck.lose(game.allPlayers, currentPlayer, game.dieOne);
-					
+					Gameboard.rollLose(frame);
 					break;
 				
 				case 5: // Tax
 					
 					game.allPlayers = conditionCheck.tax(game.allPlayers, currentPlayer, game.numPlayers);
-
+					Gameboard.rollTax(frame);
 					break;
 				
 				default: // do Nothing
@@ -160,6 +171,22 @@ public class Controller {
 		
 	}
 	
+
+
+	public static void toArrList(GameData game)
+	{
+		game.playerList = new ArrayList<Player>(Arrays.asList(game.allPlayers));
+		for(int iterator = 0; iterator < game.playerList.size(); iterator++)
+		{
+			if(game.playerList.get(iterator) == null)
+				{
+					game.playerList.remove(iterator);
+					iterator--;
+				}
+		}
+	}
+	
+	
 }
 
 /**
@@ -167,6 +194,7 @@ public class Controller {
  */
 class GameData
 {
+	ArrayList<Player> playerList;
 	public int numPlayers = 0;
 	public int pointCap = 0;
 	public int dieOne = 0;

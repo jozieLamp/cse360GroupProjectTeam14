@@ -23,15 +23,14 @@ public class Gameboard
 	JButton buttonFirstRoll;
 	JButton buttonSecondRoll;
 	Scoreboard scoreboard;
-	int dieOne;
-	int dieTwo;
-	
+
+
 	/**
 	 * Gameboard - constructor for the Gameboard class
 	 *
 	 * @players Takes in the array of players to display names.
 	 */
-	public Gameboard(Player[] players)
+	public Gameboard(Player[] players, GameData game)
 	{
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		frame = new JFrame();
@@ -68,6 +67,7 @@ public class Gameboard
 		frame.add(gamePanel);
 		frame.setVisible(true);
 		
+		Controller.game(game, frame, (GameScoreboard)scoreboard);
 //		boolean winner = false;
 //		while (!winner)
 //		{
@@ -79,6 +79,7 @@ public class Gameboard
 //		}
 	}
 	
+
 	/**
 	 * rollDie - Used to display message for rolling the die; creates a popup.
 	 * 
@@ -89,9 +90,6 @@ public class Gameboard
 	{
 		JLabel display;
 		JOptionPane roll = new JOptionPane();
-		
-		game.dieOne;
-		game.dieTwo;
 		
 		if (type == 1)
 			roll.showMessageDialog(new JFrame(), "It is " + game.allPlayers[currentPlayer].getName() + "'s turn. Roll your first die!", "First Die Roll", JOptionPane.INFORMATION_MESSAGE);
@@ -190,8 +188,12 @@ public class Gameboard
 	 * @param frame Passes the frame through to display over it
 	 * @param roll Passes the value rolled through to display it
 	 */
-	public static void rollFirstDie(JFrame frame, int roll)
+	public static void rollFirstDie(JFrame frame, int roll, GameData game, GameScoreboard scoreboard)
 	{
+		Controller.toArrList(game);
+		
+		scoreboard.updateScores(game.playerList);
+		
 		JLabel display;
 			display = new JLabel("You rolled a " + roll + "\n Add this to your score!" );
 			display.setBounds(300, 250, 200, 100);

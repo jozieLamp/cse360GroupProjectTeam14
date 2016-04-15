@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import T_Strife.Scoreboard.Score;
+import Local_Strife.Scoreboard.Score;
 
 /**
  * Class to represent the game scoreboard. Allows one to update the scores themselves, and then update the GUI scoreboard.
