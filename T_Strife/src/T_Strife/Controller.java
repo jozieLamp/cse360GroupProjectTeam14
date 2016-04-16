@@ -1,11 +1,16 @@
 package T_Strife;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-
-
+import java.util.Scanner;
+/**
+ * Controller - Class that controls the logic of the game. Uses GameScoreboard, GameData
+ *
+ * @author - Brandon Nydam (PIN 618)
+ */
 public class Controller {
 	
 	/**
@@ -84,9 +89,10 @@ public class Controller {
 	 *
 	 *@param game - Used for accessing data values in our game
 	 */
-	public static GameData game(GameData game, JFrame frame, GameScoreboard gameScoreboard)
+	public static GameData game(GameData game)
 	{
 		boolean gameWon = false;
+		Scanner scan = new Scanner(System.in);
 		
 		int type;
 		
@@ -106,57 +112,74 @@ public class Controller {
 				game.dieOne = game.gameDice.getDie1();
 				game.dieTwo = game.gameDice.getDie2();
 
-				Gameboard.rollDie(1, currentPlayer, game);				
-	
+				game.gameboard.rollDie(1, currentPlayer, game);				
+				
 				if(game.allPlayers[currentPlayer].getType().equals("Normal"))
 					type = 0;
 				else
 					type = 1;
 				
 				// play animation, whatever we decide on an transition between rolls
-				
+
 				//Debug
-				System.out.println("You rolled a " + game.dieOne + "on the score dice");
+				System.out.println("You rolled a " + game.dieOne + " on the score dice");
 				
-				Gameboard.rollFirstDie(frame, game.dieOne, game, gameScoreboard);
+				game.allPlayers[currentPlayer].updateScore(game.allPlayers[currentPlayer].getScore() + game.dieOne);
 				
+				//game.gameboard.waitForButtonPush(); // needs to implement buttons from GUI
+				game = game.gameboard.rollFirstDie(game);
+				
+				//game.gameboard.roll
 				// animation
+				game.gameboard.rollDie(2, currentPlayer, game);
+				//game.gameboard.waitForButtonPush(); // needs to implement buttons from GUI
 				
-				System.out.println("You rolled a " + game.dieTwo + "on the condition dice");
+				System.out.println("You rolled a " + game.dieTwo + " on the condition dice");
 				
-				
-				//Gameboard.rollSECOND
+				game.gameboard.scoreboard.updateScoreBoard();
+
 				
 				switch(game.dieTwo)
 				{
 				case 1: // Split
 
+					game.gameboard.rollSplit(game);
 					game.allPlayers = conditionCheck.split(game.allPlayers, currentPlayer);
-					Gameboard.rollSplit(frame);
+					Controller.toArrList(game);
+					game.gameboard.scoreboard.updateScores(game.playerList);
 					break;
 				
 				case 2: // Steal
 
+					game.gameboard.rollSteal(game);
 					game.allPlayers = conditionCheck.steal(game.allPlayers, currentPlayer, game.dieOne, game.numPlayers);
-					Gameboard.rollSteal(frame);
+					Controller.toArrList(game);
+					game.gameboard.scoreboard.updateScores(game.playerList);
 					break;
 				
 				case 3: // Multiply
 
+					game.gameboard.rollMult(game);
 					game.allPlayers = conditionCheck.multiply(game.allPlayers, currentPlayer);
-					Gameboard.rollMult(frame);
+					Controller.toArrList(game);
+					game.gameboard.scoreboard.updateScores(game.playerList);
 					break;
 				
 				case 4: // Lose Points
 
+					game.gameboard.rollLose(game);
 					game.allPlayers = conditionCheck.lose(game.allPlayers, currentPlayer, game.dieOne);
-					Gameboard.rollLose(frame);
+					Controller.toArrList(game);
+					game.gameboard.scoreboard.updateScores(game.playerList);
 					break;
 				
 				case 5: // Tax
 					
+				
+					game.gameboard.rollTax(game);
 					game.allPlayers = conditionCheck.tax(game.allPlayers, currentPlayer, game.numPlayers);
-					Gameboard.rollTax(frame);
+					Controller.toArrList(game);
+					game.gameboard.scoreboard.updateScores(game.playerList);
 					break;
 				
 				default: // do Nothing
@@ -164,6 +187,8 @@ public class Controller {
 				
 				if(game.allPlayers[currentPlayer].getScore() >= game.pointCap)
 					gameWon = true;
+				
+				
 			}
 		}
 		
@@ -202,4 +227,6 @@ class GameData
 	public Player[] allPlayers = new Player[6];
 	public dice gameDice = new dice();
 	public int turns = 0;
+	public Gameboard gameboard;
+	
 }
