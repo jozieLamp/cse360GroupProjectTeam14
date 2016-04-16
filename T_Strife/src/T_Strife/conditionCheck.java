@@ -2,8 +2,9 @@ package T_Strife;
 
 import java.util.Scanner;
 /**
- * Class to check what condition is called based on the number rolled on the condition dice
- * Performs the action called to continue game play.
+ * conditionCheck - Checks what condition needs to be used, and includes the logic for each condition.
+ *
+ * @author - Brandon Nydam (PIN 618), Simon Kim
  */
 
 public class conditionCheck 
