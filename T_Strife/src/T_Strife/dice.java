@@ -43,6 +43,7 @@ public class dice
 				}
 			}
 			
+			//30% chance of having 2 points less than what they originally rolled
 			else if(chance1 == 4 || chance1 == 5 || chance1 == 6)
 			{
 				die1 = die1 - 2;
@@ -53,7 +54,8 @@ public class dice
 				}
 			}
 			
-			else if(chance1 == 7 || chance1 == 8 || chance1 == 9)
+			//20% chance of having 3 points less than what they originally rolled
+			else if(chance1 == 7 || chance1 == 8)
 			{
 				die1 = die1 - 3;
 				
@@ -62,7 +64,8 @@ public class dice
 					die1 = 1;
 				}
 			}
-			//10% chance of dice not being affected negatively
+			
+			//20% chance of dice not being affected negatively
 			else
 			{
 				//do nothing 
@@ -71,7 +74,7 @@ public class dice
 			}
 			
 			//60% chance of rolling lose
-			if(chance2 == 1 || chance2 == 2 || chance2 == 3 )
+			if(chance2 == 1 || chance2 == 2 || chance2 == 3)
 			{
 				die2 = 4;
 			}
