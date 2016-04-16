@@ -162,9 +162,13 @@ public class Setup
 				Controller.setPlayers(playerNames, disadvantagedIndex, game);
 				Controller.setWinPoints(winPoints, game);
 				
-				Gameboard play = new Gameboard(Controller.getPlayers(game), game);
 				frame.setVisible(false);
-				//Controller.game(game);
+				
+				game.gameboard = new Gameboard(Controller.getPlayers(game));
+
+				
+				Controller.game(game);
+				
 			}
 		}
 	} //end of StartListener
