@@ -156,7 +156,7 @@ public class Setup
 				Random rand = new Random();
 				
 				int disadvantagedIndex = rand.nextInt(countPlayers);
-				int winPoints = 100;
+				int winPoints = 10;
 				
 				Controller.setNumPlayers(countPlayers, game);
 				Controller.setPlayers(playerNames, disadvantagedIndex, game);
@@ -167,7 +167,12 @@ public class Setup
 				game.gameboard = new Gameboard(Controller.getPlayers(game));
 
 				
-				Controller.game(game);
+				GameData finGame = Controller.game(game);
+				
+				game.gameboard.winMessage(finGame);
+				game.gameboard.frame.setVisible(false);
+				
+				new Main_menu();
 				
 			}
 		}
