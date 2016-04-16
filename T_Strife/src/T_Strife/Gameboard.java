@@ -25,7 +25,6 @@ public class Gameboard
 	public JButton buttonSecondRoll;
 	public GameScoreboard scoreboard;
 
-
 	/**
 	 * Gameboard - constructor for the Gameboard class
 	 *
@@ -200,6 +199,34 @@ public class Gameboard
 		game.gameboard.frame.remove(display);
 		
 		return game;
+	}
+	
+	/**
+	 * winMessage - Displays a message for when a player has won the game
+	 * 
+	 * @param game - GameData structure that contains stored values for access
+	 */
+	public void winMessage(GameData game)
+	{
+		JLabel display;
+		JOptionPane win = new JOptionPane();
+		Player winningPlayers = new Player;
+		int winIndex = -1;
+		int maximum = game.pointCap;
+		
+		for (int count = 0; count < game.numPlayers; count++)
+		{
+			if (game.allPlayers[count].getScore() >= maximum)
+			{
+				maximum = game.allPlayers[count].getScore();
+				winIndex = count;
+			}
+		}
+		
+		
+		win.showMessageDialog(new JFrame(), "A winner is you!" +
+											"\n" + game.allPlayers[winIndex].getName() + " has won the game by having the most points!" +
+											"\n" + game.allPlayers[winIndex].getName() + " had " + maximum + " points!");
 	}
 	
 	/**

@@ -175,7 +175,6 @@ public class Controller {
 				
 				case 5: // Tax
 					
-				
 					game.gameboard.rollTax(game);
 					game.allPlayers = conditionCheck.tax(game.allPlayers, currentPlayer, game.numPlayers);
 					Controller.toArrList(game);
@@ -185,6 +184,7 @@ public class Controller {
 				default: // do Nothing
 				}
 				
+				// WE NEED TO HAVE A DISCUSSION ON WHO WINS
 				if(game.allPlayers[currentPlayer].getScore() >= game.pointCap)
 					gameWon = true;
 				
