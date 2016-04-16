@@ -27,7 +27,7 @@ public class conditionCheck
 		{
 			while(iterator < playerList.length && !found)
 			{
-				if(playerList[iterator].equals(playName))
+				if(playerList[iterator].getName().equals(playName))
 				{
 					found = true;
 				}
@@ -74,7 +74,7 @@ public class conditionCheck
 		{
 			while(iterator < numPlayers && !found)
 			{
-				if(playerList[iterator].equals(playName))
+				if(playerList[iterator].getName().equals(playName))
 				{
 					found = true;
 				}
@@ -133,10 +133,20 @@ public class conditionCheck
 	{
 		int playOneScore = playerList[currentPlayer].getScore();
 		
-		playerList[currentPlayer].updateScore(playOneScore - rollOne);
+		//don't lose a point when the player's score is already 0
+		if((playerList[currentPlayer].getScore()) == 0)
+		{
+			playerList[currentPlayer].updateScore(0);
+		}
+		else
+		{
+			playerList[currentPlayer].updateScore(playOneScore - rollOne);
+		}
 		
 		return playerList;
 	}
+	
+
 	
 	/**
 	 * Tax action in which the player gains 10% of each persons number of points
@@ -144,7 +154,7 @@ public class conditionCheck
 	 * @param currentPlayer the current player whos turn it is
 	 * @param numPlayers the number of players playing the game
 	 */
-	public static Player[] tax(Player[] playerList, int currentPlayer, int numPlayers)
+		public static Player[] tax(Player[] playerList, int currentPlayer, int numPlayers)
 	{
 		int taxOnCurrent = 0;
 		int currentPlayerScore = 0;
@@ -153,12 +163,18 @@ public class conditionCheck
 		for(int iterator = 0; iterator < numPlayers; iterator++)
 		{
 			if(iterator != currentPlayer)
-			{
+			{	
 				currentPlayerScore = playerList[iterator].getScore();
-				taxOnCurrent = (int)(currentPlayerScore * .10);
-				
-				playerList[iterator].updateScore(currentPlayerScore - taxOnCurrent);
-				totalTax += taxOnCurrent;
+				if(currentPlayerScore == 0)
+				{
+					totalTax += 0;
+				}
+				else
+				{
+					taxOnCurrent = (int)(currentPlayerScore * .10);
+					playerList[iterator].updateScore(currentPlayerScore - taxOnCurrent);
+					totalTax += taxOnCurrent;
+				}
 	
 			}	
 		}
@@ -168,4 +184,6 @@ public class conditionCheck
 		
 		return playerList;
 	}
+	  
+	
 }
