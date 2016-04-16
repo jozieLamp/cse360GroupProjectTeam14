@@ -210,7 +210,6 @@ public class Gameboard
 	{
 		JLabel display;
 		JOptionPane win = new JOptionPane();
-		Player winningPlayers = new Player;
 		int winIndex = -1;
 		int maximum = game.pointCap;
 		
@@ -283,5 +282,3 @@ public class Gameboard
 		}
 */	} //end of ButtonListener
 }}
-	
-	
