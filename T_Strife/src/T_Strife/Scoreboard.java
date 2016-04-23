@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Class to represent a scoreboard. This class holds an ArrayList of Scores which contains players' points, name, type, and turns.
@@ -29,6 +30,24 @@ public abstract class Scoreboard
 			NumberTurns = numberTurns;
 		}
 	}
+	
+	//Used to sort scores
+	protected class ScoreCompare implements Comparator<Score>
+	{
+	    @Override
+	    public int compare(Score score1, Score score2)
+	    {
+			if (score1.Points > score2.Points
+					|| (score1.Points == score2.Points
+					&& score1.NumberTurns < score2.NumberTurns)
+					|| (score1.Points == score2.Points
+					&& score1.NumberTurns == score2.NumberTurns
+					&& score1.Name.compareTo(score2.Name) <= 0))
+				return 1;
+			return -1;
+	    }
+	}
+	
 	protected ArrayList<Score> scores;
 	
 	/**
