@@ -144,7 +144,7 @@ public class Controller {
 				case 1: // Split
 
 					game.gameboard.rollSplit(game);
-					game.allPlayers = conditionCheck.split(game.allPlayers, currentPlayer);
+					conditionCheck.split(game, currentPlayer);
 					Controller.toArrList(game);
 					game.gameboard.scoreboard.updateScores(game.playerList);
 					break;
@@ -175,6 +175,7 @@ public class Controller {
 				
 				case 5: // Tax
 					
+				
 					game.gameboard.rollTax(game);
 					game.allPlayers = conditionCheck.tax(game.allPlayers, currentPlayer, game.numPlayers);
 					Controller.toArrList(game);
@@ -184,7 +185,6 @@ public class Controller {
 				default: // do Nothing
 				}
 				
-				// WE NEED TO HAVE A DISCUSSION ON WHO WINS
 				if(game.allPlayers[currentPlayer].getScore() >= game.pointCap)
 					gameWon = true;
 				
