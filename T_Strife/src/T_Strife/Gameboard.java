@@ -233,10 +233,27 @@ public class Gameboard
 			}
 		}
 		
+		DisadvantagedPlayer sadPlayer;
+		for(int count = 0; count < game.numPlayers; count++)
+		{
+			if(game.allPlayers[count].getType() == "Disadvantaged")
+			{
+				sadPlayer = new DisadvantagedPlayer(game.allPlayers[count].getName());
+			}
+		}
 		
 		win.showMessageDialog(new JFrame(), "A winner is you!" +
-											"\n" + game.allPlayers[winIndex].getName() + " has won the game by having the most points!" +
-											"\n" + game.allPlayers[winIndex].getName() + " had " + maximum + " points!");
+											"\n" + game.allPlayers[winIndex].getName() + " who was a " + game.allPlayers[winIndex].getType() +
+											" type of player has won the game by having the most points!" +
+											"\n" + game.allPlayers[winIndex].getName() + " had " + maximum + " points!" +
+											"\n" + "Player " + game.allPlayers[winIndex].getName() + " was the Disadvantaged Player!" +
+											"\n\n" + "We live in a universe full of \"strife,\" in which, (despite our naive idealisms of an equal, fair "
+											+ "and supportive society,) every action, reaction, and decision is \"tendentious\" and coolly calculated. "
+											+ "Those who have an optimistic outlook on life eventually succumb to the crushing pressure of the surrounding world's woes. "
+											+ "Many games today contain too much joy and happiness. This game sets out to remind everyone of their worldly struggles, and the sad, "
+											+ "disheartening lives many lead. "
+											+ "\nWe hope you enjoyed this down-to-earth, sunshine-filled game! "
+											+ "\n-The Terrific T_Strife Team");
 	}
 	
 	/**
