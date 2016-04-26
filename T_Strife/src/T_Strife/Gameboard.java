@@ -104,27 +104,16 @@ public class Gameboard
 	 * 
 	 * @param frame Passes the frame through to display over it
 	 */
-	public void rollSplit(GameData game)
+	public String rollSplit(GameData game)
 	{ 
 		JLabel display;
+		String message = JOptionPane.showInputDialog("\nNumber rolled: 1" + 
+													 "\nAction taken: Split Points!" +
+													 "\n(Select another player and split your points with them in the Console)");
 		JOptionPane roll = new JOptionPane();
 		
-		roll.showMessageDialog(new JFrame(), "\nNumber rolled: 1" + 
-												"\nAction taken: Split Points!" +
-												"\n(Select another player and split your points with them in the Console)", 
-												"Roll Split", JOptionPane.INFORMATION_MESSAGE);
-		
-		
-	//	JLabel display;
-	//	display = new JLabel("\nNumber rolled: 1" + 
-	//			 "\nAction taken: Split Points!" +
-	//			 "\n(Select another player and split your points with them)");
-	//	display.setBounds(300, 250, 200, 100);
-	//	game.gameboard.frame.add(display);
-	//	game.gameboard.frame.validate();
-	//	Wait();
-	//	game.gameboard.frame.remove(display);
-	//	game.gameboard.frame.validate();
+		roll.showMessageDialog(new JFrame(), message, "Roll Split", JOptionPane.INFORMATION_MESSAGE);
+		return message;
 	}
 	
 	/**
@@ -322,16 +311,16 @@ public class Gameboard
 				{
 				case 1: // Split
 
-					game.gameboard.rollSplit(game);
-					conditionCheck.split(game, currentPlayer);
+					String temp = game.gameboard.rollSplit(game);
+					conditionCheck.split(game, currentPlayer, temp);
 					Controller.toArrList(game);
 					game.gameboard.scoreboard.updateScores(game.playerList, currentPlayer);
 					break;
 				
 				case 2: // Steal
 
-					game.gameboard.rollSteal(game);
-					game.allPlayers = conditionCheck.steal(game.allPlayers, currentPlayer, game.dieOne, game.numPlayers);
+					String temp = game.gameboard.rollSteal(game);
+					game.allPlayers = conditionCheck.steal(game.allPlayers, currentPlayer, game.dieOne, game.numPlayers, temp);
 					Controller.toArrList(game);
 					game.gameboard.scoreboard.updateScores(game.playerList, currentPlayer);
 					break;

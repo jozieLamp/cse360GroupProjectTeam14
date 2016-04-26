@@ -9,26 +9,26 @@ import java.util.Scanner;
 
 public class conditionCheck 
 {
-	static Scanner scan = new Scanner(System.in);
+	//static Scanner scan = new Scanner(System.in);
 	
 	/**
 	 * Split action in which two player add all of their points together and split them evenly
 	 * @param playerlist list of players in game currently
 	 * @param currentPlayer, current player who is calling the split condition
 	 */
-	public static void split(GameData gamedat, int currentPlayer)
+	public static void split(GameData gamedat, int currentPlayer, String name)
 	{
 		int iterator = 0;
 		boolean found = false;
 		
-		String playName;
+		String playName = name;
 		//SUBJECT TO CHANGE
 
 		while(!found)
 		{
 			iterator = 0;
-			System.out.println("Enter the NAME");
-			playName = scan.next();
+			//System.out.println("Enter the NAME");
+			//playName = scan.next();
 
 			while(iterator < gamedat.numPlayers && !found)
 			{
@@ -67,18 +67,19 @@ public class conditionCheck
 	 * @param rollOne the number rolled on the dice
 	 * @param numPlayers the total number of players currently playing the game
 	 */
-	public static Player[] steal(Player[] playerList, int currentPlayer, int rollOne, int numPlayers)
+	public static Player[] steal(Player[] playerList, int currentPlayer, int rollOne, int numPlayers, String name)
 	{
 		int iterator = 0;
 		boolean found = false;
 		
+		String playName = name;
 		//SUBJECT TO CHANGE
 
 		while(!found)
 		{
 			iterator = 0;
-			System.out.println("Enter the a NAME");
-			String playName = scan.next();
+			//System.out.println("Enter the a NAME");
+			//String playName = scan.next();
 			
 			while(iterator < numPlayers && !found)
 			{
