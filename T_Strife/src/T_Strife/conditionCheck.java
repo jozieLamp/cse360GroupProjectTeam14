@@ -16,19 +16,23 @@ public class conditionCheck
 	 * @param playerlist list of players in game currently
 	 * @param currentPlayer, current player who is calling the split condition
 	 */
-	public static Player[] split(Player[] playerList, int currentPlayer)
+	public static void split(GameData gamedat, int currentPlayer)
 	{
 		int iterator = 0;
 		boolean found = false;
 		
+		String playName;
 		//SUBJECT TO CHANGE
-		System.out.println("Enter the a NAME");
-		String playName = scan.next();
+
 		while(!found)
 		{
-			while(iterator < playerList.length && !found)
+			iterator = 0;
+			System.out.println("Enter the a NAME");
+			playName = scan.next();
+
+			while(iterator < gamedat.numPlayers && !found)
 			{
-				if(playerList[iterator].getName().equals(playName))
+				if(gamedat.allPlayers[iterator].getName().equals(playName))
 				{
 					found = true;
 				}
@@ -38,13 +42,13 @@ public class conditionCheck
 		
 			if (found)
 			{
-				int playOne = playerList[currentPlayer].getScore();
-				int playTwo = playerList[iterator].getScore();
+				int playOne = gamedat.allPlayers[currentPlayer].getScore();
+				int playTwo = gamedat.allPlayers[iterator].getScore();
 			
 				int average = ((playOne + playTwo) / 2);
 			
-				playerList[currentPlayer].updateScore(average);
-				playerList[iterator].updateScore(average);
+				gamedat.allPlayers[currentPlayer].updateScore(average);
+				gamedat.allPlayers[iterator].updateScore(average);
 			}
 			else // player not found
 			{
@@ -52,7 +56,7 @@ public class conditionCheck
 			}
 		//****
 		}
-		return playerList;
+		return;
 	}
 	
 	
@@ -69,10 +73,13 @@ public class conditionCheck
 		boolean found = false;
 		
 		//SUBJECT TO CHANGE
-		System.out.println("Enter the a NAME");
-		String playName = scan.next();
+
 		while(!found)
 		{
+			iterator = 0;
+			System.out.println("Enter the a NAME");
+			String playName = scan.next();
+			
 			while(iterator < numPlayers && !found)
 			{
 				if(playerList[iterator].getName().equals(playName))

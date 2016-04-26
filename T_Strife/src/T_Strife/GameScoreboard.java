@@ -1,12 +1,13 @@
 package T_Strife;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import Local_Strife.Scoreboard.Score;
+//import Local_Strife.Scoreboard.Score;
 
 /**
  * Class to represent the game scoreboard. Allows one to update the scores themselves, and then update the GUI scoreboard.
@@ -50,6 +51,10 @@ public class GameScoreboard extends Scoreboard
 					score.Points = player.getScore();
 				}
 		}
+		
+		Collections.sort(scores, new ScoreCompare());
+		Collections.reverse(scores);
+		
 		updateScoreBoard();
 	}
 	
