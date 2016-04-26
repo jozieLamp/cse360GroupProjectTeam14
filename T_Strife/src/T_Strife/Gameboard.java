@@ -78,6 +78,7 @@ public class Gameboard
 		game.dieTwo = -1;
 		currentPlayer = 0;
 		gameWon = false;
+		buttonSecondRoll.setEnabled(false);
 	}
 	
 
@@ -306,6 +307,8 @@ public class Gameboard
 			}
 			if (action == buttonSecondRoll)
 			{
+				buttonSecondRoll.setEnabled(false);
+				buttonFirstRoll.setEnabled(true);
 				game.gameboard.rollDie(2, currentPlayer, game);
 				//game.gameboard.waitForButtonPush(); // needs to implement buttons from GUI
 				
@@ -362,6 +365,9 @@ public class Gameboard
 				
 				if(game.allPlayers[currentPlayer].getScore() >= game.pointCap)
 					gameWon = true;
+				
+				currentPlayer++;
+				
 				if(currentPlayer == game.numPlayers - 1)
 				{
 					currentPlayer = 0;
