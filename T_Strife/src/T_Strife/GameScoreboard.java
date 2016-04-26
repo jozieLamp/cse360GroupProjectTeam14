@@ -35,7 +35,7 @@ public class GameScoreboard extends Scoreboard
 			Score currentScore = new Score(player.getScore(), player.getName(), false, 0);
 			scores.add(currentScore);
 		}
-		updateScoreBoard(0);
+		updateScoreBoard(players, 0);
 	}
 	
 	/**
@@ -54,13 +54,13 @@ public class GameScoreboard extends Scoreboard
 		}
 		Collections.sort(scores, new ScoreCompare());
 		Collections.reverse(scores);
-		updateScoreBoard(currentPlayerIndex);
+		updateScoreBoard(players, currentPlayerIndex);
 	}
 	
 	/**
 	 * updateScoreBoard() - Updates the GUI scoreboard
 	 */
-	public void updateScoreBoard(int currentPlayerIndex)
+	public void updateScoreBoard(ArrayList<Player> players, int currentPlayerIndex)
 	{
 		scorePanel.removeAll();
 		JLabel rLabel = new JLabel("Rank");
@@ -97,7 +97,7 @@ public class GameScoreboard extends Scoreboard
 			nameLabel.setBorder(BorderFactory.createEtchedBorder());
 			pointsLabel.setBorder(BorderFactory.createEtchedBorder());
 			
-			if(index == currentPlayerIndex)
+			if(scores.get(index).Name.equals(players.get(index).getName()))
 			{
 				rankLabel.setBackground(Color.orange);
 				nameLabel.setBackground(Color.orange);
@@ -109,5 +109,6 @@ public class GameScoreboard extends Scoreboard
 			scorePanel.add(nameLabel);
 			scorePanel.add(pointsLabel);
 		}
+		scorePanel.validate();
 	}
 }
