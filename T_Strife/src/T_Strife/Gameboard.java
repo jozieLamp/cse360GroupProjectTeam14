@@ -78,7 +78,6 @@ public class Gameboard
 		game.dieTwo = -1;
 		currentPlayer = 0;
 		gameWon = false;
-		buttonSecondRoll.setEnabled(false);
 	}
 	
 
@@ -201,7 +200,7 @@ public class Gameboard
 	{
 		Controller.toArrList(game);
 		
-		game.gameboard.scoreboard.updateScores(game.playerList);
+		game.gameboard.scoreboard.updateScores(game.playerList, currentPlayer);
 		
 		JLabel display;
 			display = new JLabel("You rolled a " + game.dieOne + "\n Add this to your score!" );
@@ -234,29 +233,10 @@ public class Gameboard
 			}
 		}
 		
-		DisadvantagedPlayer sadPlayer;
-		for(int count = 0; count < game.numPlayers; count++)
-		{
-			if(game.allPlayers[count].getType() == "Disadvantaged")
-			{
-				sadPlayer = new DisadvantagedPlayer(game.allPlayers[count].getName());
-			}
-		}
 		
 		win.showMessageDialog(new JFrame(), "A winner is you!" +
-											"\n" + game.allPlayers[winIndex].getName() + ", who was a " + game.allPlayers[winIndex].getType() +
-											" type of player has won the game by having the most points!" +
-											"\n" + game.allPlayers[winIndex].getName() + " had " + maximum + " points!" +
-											"\n" + game.allPlayers[winIndex].getName() + " was the Disadvantaged Player!" +
-											"\n\n" + "We live in a universe full of \"strife,\" in which, "
-											+ "\n(despite our naive idealisms of an equal, fair and supportive society,)"
-											+ "\n every action, reaction, and decision is \"tendentious\" and coolly calculated. "
-											+ "\nThose who have an optimistic outlook on life eventually succumb to the crushing "
-											+ "\npressure of the surrounding world's woes. "
-											+ "\nMany games today contain too much joy and happiness. This game sets out to remind "
-											+ "\neveryone of their worldly struggles and the sad, disheartening lives many lead. "
-											+ "\nWe hope you enjoyed this down-to-earth, sunshine-filled game! "
-											+ "\n-The Terrific T_Strife Team");
+											"\n" + game.allPlayers[winIndex].getName() + " has won the game by having the most points!" +
+											"\n" + game.allPlayers[winIndex].getName() + " had " + maximum + " points!");
 	}
 	
 	/**
@@ -314,7 +294,7 @@ public class Gameboard
 				
 				System.out.println("You rolled a " + game.dieTwo + " on the condition dice");
 				
-				game.gameboard.scoreboard.updateScoreBoard();
+				game.gameboard.scoreboard.updateScoreBoard(currentPlayer);
 
 				
 				switch(game.dieTwo)
@@ -324,7 +304,7 @@ public class Gameboard
 					game.gameboard.rollSplit(game);
 					conditionCheck.split(game, currentPlayer);
 					Controller.toArrList(game);
-					game.gameboard.scoreboard.updateScores(game.playerList);
+					game.gameboard.scoreboard.updateScores(game.playerList, currentPlayer);
 					break;
 				
 				case 2: // Steal
@@ -332,7 +312,7 @@ public class Gameboard
 					game.gameboard.rollSteal(game);
 					game.allPlayers = conditionCheck.steal(game.allPlayers, currentPlayer, game.dieOne, game.numPlayers);
 					Controller.toArrList(game);
-					game.gameboard.scoreboard.updateScores(game.playerList);
+					game.gameboard.scoreboard.updateScores(game.playerList, currentPlayer);
 					break;
 				
 				case 3: // Multiply
@@ -340,7 +320,7 @@ public class Gameboard
 					game.gameboard.rollMult(game);
 					game.allPlayers = conditionCheck.multiply(game.allPlayers, currentPlayer);
 					Controller.toArrList(game);
-					game.gameboard.scoreboard.updateScores(game.playerList);
+					game.gameboard.scoreboard.updateScores(game.playerList, currentPlayer);
 					break;
 				
 				case 4: // Lose Points
@@ -348,7 +328,7 @@ public class Gameboard
 					game.gameboard.rollLose(game);
 					game.allPlayers = conditionCheck.lose(game.allPlayers, currentPlayer, game.dieOne);
 					Controller.toArrList(game);
-					game.gameboard.scoreboard.updateScores(game.playerList);
+					game.gameboard.scoreboard.updateScores(game.playerList, currentPlayer);
 					break;
 				
 				case 5: // Tax
@@ -357,7 +337,7 @@ public class Gameboard
 					game.gameboard.rollTax(game);
 					game.allPlayers = conditionCheck.tax(game.allPlayers, currentPlayer, game.numPlayers);
 					Controller.toArrList(game);
-					game.gameboard.scoreboard.updateScores(game.playerList);
+					game.gameboard.scoreboard.updateScores(game.playerList, currentPlayer);
 					break;
 				
 				default: // do Nothing
@@ -365,9 +345,6 @@ public class Gameboard
 				
 				if(game.allPlayers[currentPlayer].getScore() >= game.pointCap)
 					gameWon = true;
-				
-				currentPlayer++;
-				
 				if(currentPlayer == game.numPlayers - 1)
 				{
 					currentPlayer = 0;
