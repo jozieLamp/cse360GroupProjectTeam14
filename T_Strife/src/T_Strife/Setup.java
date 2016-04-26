@@ -164,16 +164,9 @@ public class Setup
 				
 				frame.setVisible(false);
 				
-				game.gameboard = new Gameboard(Controller.getPlayers(game));
+				game.gameboard = new Gameboard(Controller.getPlayers(game), game);
 
-				
-				GameData finGame = Controller.game(game);
-				
-				game.gameboard.winMessage(finGame);
-				game.gameboard.frame.setVisible(false);
-				
-				new Main_menu();
-				
+				Controller.game(game);
 			}
 		}
 	} //end of StartListener
