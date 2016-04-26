@@ -24,13 +24,18 @@ public class Gameboard
 	public JButton buttonFirstRoll;
 	public JButton buttonSecondRoll;
 	public GameScoreboard scoreboard;
+	
+	private GameData game;
+	private int type;
+	private int currentPlayer;
+	private boolean gameWon;
 
 	/**
 	 * Gameboard - constructor for the Gameboard class
 	 *
 	 * @players Takes in the array of players to display names.
 	 */
-	public Gameboard(Player[] players)
+	public Gameboard(Player[] players, GameData aGame)
 	{
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		frame = new JFrame();
@@ -67,6 +72,12 @@ public class Gameboard
 		frame.add(gamePanel);
 		frame.setVisible(true);
 	
+		game = aGame;
+		type = 0;
+		game.dieOne = -1;
+		game.dieTwo = -1;
+		currentPlayer = 0;
+		gameWon = false;
 	}
 	
 
@@ -250,35 +261,104 @@ public class Gameboard
 		 * @param event Checks whether the button pressed was for the first or second roll. 
 		 */
 		public void actionPerformed(ActionEvent event)
-		{/*
+		{
 			Object action = event.getSource();
 			if (action == buttonFirstRoll)
 			{
-				rollFirstDie(frame, game.gameDice.getDie1());
+				buttonSecondRoll.setEnabled(true);
+				buttonFirstRoll.setEnabled(false);
+				game.gameDice.roll(game.allPlayers[currentPlayer]);
+				
+				game.dieOne = game.gameDice.getDie1();
+				game.dieTwo = game.gameDice.getDie2();
+
+				game.gameboard.rollDie(1, currentPlayer, game);				
+				
+				if(game.allPlayers[currentPlayer].getType().equals("Normal"))
+					type = 0;
+				else
+					type = 1;
+
+				//Debug
+				System.out.println("You rolled a " + game.dieOne + " on the score dice");
+				
+				game.allPlayers[currentPlayer].updateScore(game.allPlayers[currentPlayer].getScore() + game.dieOne);
+				game = game.gameboard.rollFirstDie(game);
 			}
 			if (action == buttonSecondRoll)
 			{
-				if (game.gameDice.getDie2() == 1)
+				game.gameboard.rollDie(2, currentPlayer, game);
+				//game.gameboard.waitForButtonPush(); // needs to implement buttons from GUI
+				
+				System.out.println("You rolled a " + game.dieTwo + " on the condition dice");
+				
+				game.gameboard.scoreboard.updateScoreBoard();
+
+				
+				switch(game.dieTwo)
 				{
-					rollSplit(frame);
+				case 1: // Split
+
+					game.gameboard.rollSplit(game);
+					conditionCheck.split(game, currentPlayer);
+					Controller.toArrList(game);
+					game.gameboard.scoreboard.updateScores(game.playerList);
+					break;
+				
+				case 2: // Steal
+
+					game.gameboard.rollSteal(game);
+					game.allPlayers = conditionCheck.steal(game.allPlayers, currentPlayer, game.dieOne, game.numPlayers);
+					Controller.toArrList(game);
+					game.gameboard.scoreboard.updateScores(game.playerList);
+					break;
+				
+				case 3: // Multiply
+
+					game.gameboard.rollMult(game);
+					game.allPlayers = conditionCheck.multiply(game.allPlayers, currentPlayer);
+					Controller.toArrList(game);
+					game.gameboard.scoreboard.updateScores(game.playerList);
+					break;
+				
+				case 4: // Lose Points
+
+					game.gameboard.rollLose(game);
+					game.allPlayers = conditionCheck.lose(game.allPlayers, currentPlayer, game.dieOne);
+					Controller.toArrList(game);
+					game.gameboard.scoreboard.updateScores(game.playerList);
+					break;
+				
+				case 5: // Tax
+					
+				
+					game.gameboard.rollTax(game);
+					game.allPlayers = conditionCheck.tax(game.allPlayers, currentPlayer, game.numPlayers);
+					Controller.toArrList(game);
+					game.gameboard.scoreboard.updateScores(game.playerList);
+					break;
+				
+				default: // do Nothing
 				}
-				if (game.getDieTwo() == 2)
+				
+				if(game.allPlayers[currentPlayer].getScore() >= game.pointCap)
+					gameWon = true;
+				if(currentPlayer == game.numPlayers - 1)
 				{
-					rollSteal(frame);
+					currentPlayer = 0;
+					game.turns++;
+					if(gameWon)
+					{
+						game.turns--;
+						buttonSecondRoll.setEnabled(false);
+						buttonFirstRoll.setEnabled(false);
+						
+						game.gameboard.winMessage(game);
+						game.gameboard.frame.setVisible(false);
+						
+						new Main_menu();
+					}
 				}
-				if (game.getDieTwo() == 3)
-				{
-					rollMult(frame);
-				}
-				if (game.getDieTwo() == 4)
-				{
-					rollLose(frame);
-				}
-				if (game.getDieTwo() == 5)
-				{
-					rollTax(frame);
-				}
-			}	
 		}
-*/	} //end of ButtonListener
+	} //end of ButtonListener
 }}
