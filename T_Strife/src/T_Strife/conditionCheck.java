@@ -27,7 +27,7 @@ public class conditionCheck
 		while(!found)
 		{
 			iterator = 0;
-			System.out.println("Enter the a NAME");
+			System.out.println("Enter the NAME");
 			playName = scan.next();
 
 			while(iterator < gamedat.numPlayers && !found)

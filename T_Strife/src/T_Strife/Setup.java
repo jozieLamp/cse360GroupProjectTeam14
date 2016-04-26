@@ -145,13 +145,14 @@ public class Setup
 			Object action = event.getSource();
 			if (action == start)
 			{
+				boolean found = false;
 				playerNames[0] = slot1.getText();
 				playerNames[1] = slot2.getText();
 				playerNames[2] = slot3.getText();
 				playerNames[3] = slot4.getText();
 				playerNames[4] = slot5.getText();
 				playerNames[5] = slot6.getText();
-			
+				
 				GameData game = new GameData();
 				Random rand = new Random();
 				
@@ -165,8 +166,24 @@ public class Setup
 				frame.setVisible(false);
 				
 				game.gameboard = new Gameboard(Controller.getPlayers(game), game);
-
-				Controller.game(game);
+				
+				for (int temp = 0; temp < playerNames.length; temp++)
+				{
+					for (int check = temp+1; check < playerNames.length; temp++)
+					{
+						if (playerNames[temp] == playerNames[check])
+						{
+							found = true;
+						}
+					}
+				}
+				if (found == true)
+				{
+					JOptionPane error = new JOptionPane();
+					error.showMessageDialog(new JFrame(), "There cannot be two players with the same name");
+				}
+				else
+					Controller.game(game);
 			}
 		}
 	} //end of StartListener
