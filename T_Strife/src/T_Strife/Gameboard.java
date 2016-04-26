@@ -375,12 +375,14 @@ public class Gameboard
 					game.turns++;
 					if(gameWon)
 					{
-						game.turns--;
 						buttonSecondRoll.setEnabled(false);
 						buttonFirstRoll.setEnabled(false);
 						
 						game.gameboard.winMessage(game);
 						game.gameboard.frame.setVisible(false);
+						
+						Leaderboard leaderboard = new Leaderboard("leaderboard.txt");
+						leaderboard.addToLeaderboard(playerList, game.turns);
 						
 						new Main_menu();
 					}
