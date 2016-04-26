@@ -1,4 +1,5 @@
 package T_Strife;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -7,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-//import Local_Strife.Scoreboard.Score;
+import T_Strife.Scoreboard.Score;
 
 /**
  * Class to represent the game scoreboard. Allows one to update the scores themselves, and then update the GUI scoreboard.
@@ -34,14 +35,14 @@ public class GameScoreboard extends Scoreboard
 			Score currentScore = new Score(player.getScore(), player.getName(), false, 0);
 			scores.add(currentScore);
 		}
-		updateScoreBoard();
+		updateScoreBoard(0);
 	}
 	
 	/**
 	 * UpdateScores - Updates the scores for each player in the provided list
 	 * @param players - The players in the game with updated scores
 	 */
-	public void updateScores(ArrayList<Player> players)
+	public void updateScores(ArrayList<Player> players, int currentPlayerIndex)
 	{
 		for(Score score : scores)
 		{
@@ -51,19 +52,17 @@ public class GameScoreboard extends Scoreboard
 					score.Points = player.getScore();
 				}
 		}
-		
 		Collections.sort(scores, new ScoreCompare());
 		Collections.reverse(scores);
-		
-		updateScoreBoard();
+		updateScoreBoard(currentPlayerIndex);
 	}
 	
 	/**
 	 * updateScoreBoard() - Updates the GUI scoreboard
 	 */
-	public void updateScoreBoard()
+	public void updateScoreBoard(int currentPlayerIndex)
 	{
-		scorePanel.removeAll(); 
+		scorePanel.removeAll();
 		JLabel rLabel = new JLabel("Rank");
 		JLabel nLabel = new JLabel("Name");
 		JLabel pLabel = new JLabel("Points");
@@ -97,12 +96,18 @@ public class GameScoreboard extends Scoreboard
 			rankLabel.setBorder(BorderFactory.createEtchedBorder());
 			nameLabel.setBorder(BorderFactory.createEtchedBorder());
 			pointsLabel.setBorder(BorderFactory.createEtchedBorder());
+			
+			if(index == currentPlayerIndex)
+			{
+				rankLabel.setBackground(Color.orange);
+				nameLabel.setBackground(Color.orange);
+				pointsLabel.setBackground(Color.orange);
+			}
 
 			//Add to scorePanel
 			scorePanel.add(rankLabel);
 			scorePanel.add(nameLabel);
 			scorePanel.add(pointsLabel);
 		}
-		scorePanel.validate();
 	}
 }
