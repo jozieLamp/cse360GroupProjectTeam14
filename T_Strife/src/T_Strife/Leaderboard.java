@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.*;
 
@@ -36,11 +37,22 @@ public class Leaderboard extends Scoreboard {
 
 	private JRadioButtonMenuItem butAll, butDis, butNorm;
 
-	/*public static void main(String[] args) //TEMPORARY FOR TESTING
+	public static void main(String[] args) //TEMPORARY FOR TESTING
 	{
 		Leaderboard l = new Leaderboard("leaderboard.txt");
-		l.displayLeaderBoard(null);
-	}*/
+		ArrayList<Player> players = new ArrayList<Player>();
+		Player playerA = new DisadvantagedPlayer("X");
+		Player playerB = new NormalPlayer("Y");
+		Player playerC = new NormalPlayer("Z");
+		players.add(playerA);
+		players.add(playerB);
+		players.add(playerC);
+		playerA.updateScore(23);
+		playerB.updateScore(122);
+		playerC.updateScore(98);
+		l.addToLeaderboard(players, 50);
+		l.displayLeaderBoard();
+	}
 	
 	/**
 	 * Leaderboard - Creates a new leaderboard (this is a popup dialog)
@@ -58,17 +70,15 @@ public class Leaderboard extends Scoreboard {
 	 */
 	public void getStoredLeaderboard() {
 		try {
-			File scoreFile = new File(fileName);
-			FileReader scoreRead = new FileReader(scoreFile);
-			BufferedReader br = new BufferedReader(scoreRead);
+			Scanner in = new Scanner(new FileReader(fileName));
 
 			scores.clear();
 
-			while (br.ready()) {
-				String[] currentLineElements = br.readLine().split("\t");
+			while (in.hasNext()) {
+				String[] currentLineElements = in.nextLine().split("\t");
 
-				int points = Integer.parseInt(currentLineElements[0]);
-				String name = currentLineElements[1];
+				String name = currentLineElements[0];
+				int points = Integer.parseInt(currentLineElements[1]);
 				boolean disadvantaged = currentLineElements[2].equals("true");
 				int numberTurns = Integer.parseInt(currentLineElements[3]);
 
@@ -77,10 +87,12 @@ public class Leaderboard extends Scoreboard {
 				scores.add(nScore);
 			}
 
-			br.close();
+			//br.close();
+			in.close();
 		} catch (Exception e) {
-			System.out.println("IO Error");
+			System.out.println("IO Error: " + e.getMessage());
 		}
+		//storeLeaderboard();
 	}
 
 	/**
