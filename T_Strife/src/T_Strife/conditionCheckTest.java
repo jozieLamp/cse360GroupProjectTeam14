@@ -10,7 +10,8 @@ public class conditionCheckTest {
 
 	@Test
 	public void testSplit() {
-				
+		
+		GameData gamedat = new GameData();		
 		Player playerA = new DisadvantagedPlayer("John");
 		Player playerB = new NormalPlayer("Bo");
 		Player playerC = new NormalPlayer("Carl");
@@ -21,10 +22,10 @@ public class conditionCheckTest {
 		
 		Player[] playerList = {playerA, playerB, playerC};
 		
-		conditionCheck.split(playerList, 2);
-		
-		//For this test curent player is playerC (Carl) other player parameter is John
+		//For this test current player is playerC (Carl) other player parameter is John
 		//Both playerC and playerA should have 25 points
+		conditionCheck.split(gamedat, 2, "John");
+		
 		assertEquals(playerA.getScore(), 25);
 		assertEquals(playerB.getScore(), 35);
 		assertEquals(playerC.getScore(), 25);
@@ -37,7 +38,7 @@ public class conditionCheckTest {
 		
 		//current player is playerA aka John
 		//and the other player parameter for this test is playerB aka Bo
-		conditionCheck.split(playerList, 0);
+		conditionCheck.split(gamedat, 0, "Bo");
 	
 		//both A and B should have 42 points, playerC's points will remain same
 		assertEquals(playerA.getScore(), 42);
@@ -60,12 +61,12 @@ public class conditionCheckTest {
 		Player[] playerList = {playerA, playerB, playerC};
 		
 		//current player is playerC aka Carl
+		//Stealing from Bo
 		//parameters are playerList array, position of current player, 7 points dice roll
 		//total number of players
-		conditionCheck.steal(playerList, 2, 7, 3);
+		conditionCheck.steal(playerList, 2, 7, 3, "Bo");
 		
 		
-		//Stealing points from Bo
 		assertEquals(playerA.getScore(), 20);  //playerA's points will not change
 		assertEquals(playerB.getScore(), 18);  //playerB's points will be reduced by 7
 		assertEquals(playerC.getScore(), 37);  //playerC's points will be increased by 7
@@ -76,7 +77,7 @@ public class conditionCheckTest {
 		playerC.updateScore(88);
 		
 		//current player is playerA, playerA will steal 5 points from playerC aka Carl
-		conditionCheck.steal(playerList, 0, 5, 3);
+		conditionCheck.steal(playerList, 0, 5, 3, "Carl");
 		
 		assertEquals(playerA.getScore(), 77); //playerA's points will increase by 5
 		assertEquals(playerB.getScore(), 80); //playerB's points will remain the same
@@ -88,7 +89,7 @@ public class conditionCheckTest {
 		
 		//check what happens when playerA attempts to steal from playerB who has 0 points
 		//he shouldn't gain any points and playerB's points should remain the same 
-		conditionCheck.steal(playerList, 0, 10, 3);
+		conditionCheck.steal(playerList, 0, 10, 3, "Bo");
 		
 		assertEquals(playerA.getScore(), 10);
 		assertEquals(playerB.getScore(), 0);
