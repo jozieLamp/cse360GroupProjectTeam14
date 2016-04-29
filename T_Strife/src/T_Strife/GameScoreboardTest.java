@@ -34,9 +34,9 @@ public class GameScoreboardTest {
 		playerA.updateScore(23);
 		playerB.updateScore(43);
 		playerC.updateScore(36);
-		scoreboard.updateScores(players);
-		assertEquals(scoreboard.scores.get(0).Points, 23);
-		assertEquals(scoreboard.scores.get(1).Points, 43);
-		assertEquals(scoreboard.scores.get(2).Points, 36);
+		scoreboard.updateScores(players, 10);
+		assertEquals(scoreboard.scores.get(0).Points, 43);
+		assertEquals(scoreboard.scores.get(1).Points, 36);
+		assertEquals(scoreboard.scores.get(2).Points, 23);
 	}
 }
