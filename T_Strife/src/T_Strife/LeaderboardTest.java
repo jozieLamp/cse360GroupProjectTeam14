@@ -69,35 +69,4 @@ public class LeaderboardTest {
 		} catch (Exception e) {
 		}
 	}
-/*
-	@Test
-	public void testStored() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		Player playerA = new DisadvantagedPlayer("A");
-		Player playerB = new NormalPlayer("B");
-		Player playerC = new NormalPlayer("C");
-		players.add(playerA);
-		players.add(playerB);
-		players.add(playerC);
-		playerA.updateScore(63);
-		playerB.updateScore(126);
-		playerC.updateScore(36);
-		Leaderboard scoreboard = new Leaderboard("leaderboardtest.txt");
-		scoreboard.addToLeaderboard(players, 23);
-
-		Leaderboard secondScoreboard = new Leaderboard("leaderboardtest.txt");
-		
-		assertEquals(secondScoreboard.searchScoreIndex("A"), 1);
-		assertEquals(secondScoreboard.searchScoreIndex("B"), 0);
-		assertEquals(secondScoreboard.searchScoreIndex("C"), 2);
-		assertEquals(secondScoreboard.searchScoreIndex("D"), -1);
-		
-		try {
-			PrintWriter pw = new PrintWriter("leaderboardtest.txt");
-			pw.close();
-		} 
-		catch (Exception e){}
-		}
-		
-	}*/
 }
