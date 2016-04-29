@@ -37,7 +37,7 @@ public class PlayerTest {
 		assertEquals("Bob", nPlayer.getName());
 		nPlayer.setName("Bobby");
 		assertEquals("Bobby", nPlayer.getName());
-		
+		nPlayer.setName("Joe");
 		assertEquals("Joe", nPlayer.getName());
 		nPlayer.setName("Joey");
 		assertEquals("Joey", nPlayer.getName());
