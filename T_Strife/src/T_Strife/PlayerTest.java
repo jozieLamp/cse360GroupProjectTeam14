@@ -1,5 +1,6 @@
-import static org.junit.Assert.*;
+package T_Strife;
 
+import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class PlayerTest {
