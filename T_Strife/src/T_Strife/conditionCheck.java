@@ -4,7 +4,7 @@ import java.util.Scanner;
 /**
  * conditionCheck - Checks what condition needs to be used, and includes the logic for each condition.
  *
- * @author - Brandon Nydam (PIN 618), Simon Kim
+ * @author - Brandon Nydam (PIN 618), Seong Kim (PIN 422)	
  */
 
 public class conditionCheck 
