@@ -4,7 +4,7 @@ import java.util.Scanner;
 /**
  * conditionCheck - Checks what condition needs to be used, and includes the logic for each condition.
  *
- * @author - Brandon Nydam (PIN 618), Seong Kim (PIN 422)	
+ * @author - Brandon Nydam (PIN 618), Simon Kim
  */
 
 public class conditionCheck 
@@ -178,7 +178,7 @@ public class conditionCheck
 				}
 				else
 				{
-					taxOnCurrent = (int)Math.ceil((currentPlayerScore * .10));
+					taxOnCurrent = (int) Math.ceil((double)(currentPlayerScore * .10));
 					playerList[iterator].updateScore(currentPlayerScore - taxOnCurrent);
 					totalTax += taxOnCurrent;
 				}
