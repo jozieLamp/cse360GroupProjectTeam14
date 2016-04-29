@@ -120,16 +120,18 @@ public class Gameboard
 	 * rollSteal - Displays message for rolling a steal
 	 * 
 	 * @param frame Passes the frame through to display over it
+	 * @return 
 	 */
-	public void rollSteal(GameData game)
+	public String rollSteal(GameData game)
 	{
 		JLabel display;
 		JOptionPane roll = new JOptionPane();
+		String message = JOptionPane.showInputDialog( "\nNumber rolled: 2" +
+					"\nAction taken: Steal Points!" + 
+					"\n(Select another player and take that many points from them in the Console)");
 		
-		roll.showMessageDialog(new JFrame(), "\nNumber rolled: 2" +
-				 							"\nAction taken: Steal Points!" + 
-				 							"\n(Select another player and take that many points from them in the Console)", 
-											"Roll Split", JOptionPane.INFORMATION_MESSAGE);
+		roll.showMessageDialog(new JFrame(), message, "Roll Split", JOptionPane.INFORMATION_MESSAGE);
+		return message;
 	}
 	
 	/**
@@ -224,11 +226,12 @@ public class Gameboard
 		}
 		
 		DisadvantagedPlayer sadPlayer;
+		String sadderPlayer = "";
 		for(int count = 0; count < game.numPlayers; count++)
 		{
 			if(game.allPlayers[count].getType() == "Disadvantaged")
 			{
-				sadPlayer = new DisadvantagedPlayer(game.allPlayers[count].getName());
+				sadderPlayer = game.allPlayers[count].getName();
 			}
 		}
 		
@@ -236,7 +239,7 @@ public class Gameboard
 											"\n" + game.allPlayers[winIndex].getName() + ", who was a " + game.allPlayers[winIndex].getType() +
 											" type of player has won the game by having the most points!" +
 											"\n" + game.allPlayers[winIndex].getName() + " had " + maximum + " points!" +
-											"\n" + game.allPlayers[winIndex].getName() + " was the Disadvantaged Player!" +
+											"\n" + sadderPlayer + " was the Disadvantaged Player!" +
 											"\n\n" + "We live in a universe full of \"strife,\" in which, "
 											+ "\n(despite our naive idealisms of an equal, fair and supportive society,)"
 											+ "\n every action, reaction, and decision is \"tendentious\" and coolly calculated. "
@@ -319,8 +322,8 @@ public class Gameboard
 				
 				case 2: // Steal
 
-					String temp = game.gameboard.rollSteal(game);
-					game.allPlayers = conditionCheck.steal(game.allPlayers, currentPlayer, game.dieOne, game.numPlayers, temp);
+					String temp2 = game.gameboard.rollSteal(game);
+					game.allPlayers = conditionCheck.steal(game.allPlayers, currentPlayer, game.dieOne, game.numPlayers, temp2);
 					Controller.toArrList(game);
 					game.gameboard.scoreboard.updateScores(game.playerList, currentPlayer);
 					break;
