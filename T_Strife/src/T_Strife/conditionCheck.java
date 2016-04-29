@@ -86,7 +86,6 @@ public class conditionCheck
 					found = true;
 				}
 				else
-					* @param numPlayers the total number of players currently playing the game
 					iterator++;
 			}
 		
