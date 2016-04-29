@@ -1,3 +1,4 @@
+
 	package T_Strife;
 	
 	import java.awt.*;
@@ -21,7 +22,7 @@
 			frame = new JFrame("Tendentious Strife - Main Menu");
 			frame.setSize(400, 400);
 			
-			Leaderboard board = new Leaderboard("leaderboard.txt");
+			board = new Leaderboard("leaderboard.txt");
 			
 			JPanel panel = new JPanel(new BorderLayout());
 			JLabel name = new JLabel("TENDENTIOUS STRIFE");
@@ -80,5 +81,3 @@
 			}
 		} //end of ButtonListener
 	}
-	
-	
