@@ -20,7 +20,7 @@ public abstract class Player
 		this.name = name;
 		score = 0;
 		currentDie = -1;
-		currentConditionDice = -1;
+		currentConditionDie = -1;
 	}
 	
 	/** Method to return the type of a player */
