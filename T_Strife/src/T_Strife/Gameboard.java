@@ -106,13 +106,43 @@ public class Gameboard
 	 */
 	public String rollSplit(GameData game)
 	{ 
+		//message can't = current player and check that name exists, game.allPlayers
 		JLabel display;
+		JFrame frame = new JFrame();
 		String message = JOptionPane.showInputDialog("\nNumber rolled: 1" + 
 													 "\nAction taken: Split Points!" +
 													 "\n(Select another player and split your points with them in the Console)");
-		JOptionPane roll = new JOptionPane();
+		boolean error = true;
 		
-		roll.showMessageDialog(new JFrame(), message, "Roll Split", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane roll = new JOptionPane();
+		//roll.showMessageDialog(frame, message, "Roll Split", JOptionPane.INFORMATION_MESSAGE);
+
+		while(error)
+		{
+			boolean found = false;
+			for(int count = 0; count < game.numPlayers; count++)
+			{
+				if(message.equals(game.allPlayers[count].getName()))
+				{
+					found = true;
+				}
+			}
+			if(message.equals(game.allPlayers[currentPlayer].getName())|| !found)
+			{
+				roll.showMessageDialog(frame,  "You cannot select yourself, or the player name does not exist.", "Error!", JOptionPane.INFORMATION_MESSAGE);
+				message = JOptionPane.showInputDialog("\nNumber rolled: 1" + 
+						 "\nAction taken: Split Points!" +
+						 "\n(Select another player and split your points with them in the Console)");
+				//roll.showMessageDialog(frame, message, "Roll Split", JOptionPane.INFORMATION_MESSAGE);
+
+			}
+			else
+			{
+				error = false;
+			}
+		}
+		
+		
 		return message;
 	}
 	
@@ -130,7 +160,37 @@ public class Gameboard
 					"\nAction taken: Steal Points!" + 
 					"\n(Select another player and take that many points from them in the Console)");
 		
-		roll.showMessageDialog(new JFrame(), message, "Roll Split", JOptionPane.INFORMATION_MESSAGE);
+		
+		boolean error = true;
+		
+		//roll.showMessageDialog(new JFrame(), message, "Roll Steal", JOptionPane.INFORMATION_MESSAGE);
+
+		while(error)
+		{
+			boolean found = false;
+			for(int count = 0; count < game.numPlayers; count++)
+			{
+				if(message.equals(game.allPlayers[count].getName()))
+				{
+					found = true;
+				}
+			}
+			if(message.equals(game.allPlayers[currentPlayer].getName())|| !found)
+			{
+				roll.showMessageDialog(frame,  "You cannot select yourself, or the player name does not exist.", "Error!", JOptionPane.INFORMATION_MESSAGE);
+				message = JOptionPane.showInputDialog( "\nNumber rolled: 2" +
+						"\nAction taken: Steal Points!" + 
+						"\n(Select another player and take that many points from them in the Console)");
+				//roll.showMessageDialog(frame, message, "Roll Steal", JOptionPane.INFORMATION_MESSAGE);
+
+			}
+			else
+			{
+				error = false;
+			}
+		}
+		
+		
 		return message;
 	}
 	
@@ -213,7 +273,7 @@ public class Gameboard
 	{
 		JLabel display;
 		JOptionPane win = new JOptionPane();
-		int winIndex = -1;
+		int winIndex = 0;
 		int maximum = game.pointCap;
 		
 		for (int count = 0; count < game.numPlayers; count++)
