@@ -12,7 +12,7 @@ public class PlayerTest {
 		DisadvantagedPlayer dPlayer = new DisadvantagedPlayer("Joe");
 		
 		assertNotNull(nPlayer);
-		assertNotNull(mPlayer);
+		assertNotNull(dPlayer);
 	}
 
 	@Test
