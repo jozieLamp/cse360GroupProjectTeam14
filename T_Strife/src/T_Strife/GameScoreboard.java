@@ -97,11 +97,11 @@ public class GameScoreboard extends Scoreboard
 			nameLabel.setBorder(BorderFactory.createEtchedBorder());
 			pointsLabel.setBorder(BorderFactory.createEtchedBorder());
 			
-			if(scores.get(index).Name.equals(players.get(index).getName()))
+			if(scores.get(index).Name.equals(players.get(currentPlayerIndex).getName()))
 			{
-				rankLabel.setBackground(Color.orange);
-				nameLabel.setBackground(Color.orange);
-				pointsLabel.setBackground(Color.orange);
+				rankLabel.setBackground(Color.red);
+				nameLabel.setBackground(Color.red);
+				pointsLabel.setBackground(Color.red);
 			}
 
 			//Add to scorePanel
