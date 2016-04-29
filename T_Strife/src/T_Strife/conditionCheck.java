@@ -65,7 +65,6 @@ public class conditionCheck
 	 * @param playerList list of players in the game
 	 * @param currentPlayer currentplayer who rolled this action
 	 * @param rollOne the number rolled on the dice
-	 * @param numPlayers the total number of players currently playing the game
 	 */
 	public static Player[] steal(Player[] playerList, int currentPlayer, int rollOne, int numPlayers, String name)
 	{
@@ -79,7 +78,6 @@ public class conditionCheck
 		{
 			iterator = 0;
 			//System.out.println("Enter the a NAME");
-			//String playName = scan.next();
 			
 			while(iterator < numPlayers && !found)
 			{
@@ -88,6 +86,7 @@ public class conditionCheck
 					found = true;
 				}
 				else
+					* @param numPlayers the total number of players currently playing the game
 					iterator++;
 			}
 		
@@ -180,7 +179,7 @@ public class conditionCheck
 				}
 				else
 				{
-					taxOnCurrent = (int)(currentPlayerScore * .10);
+					taxOnCurrent = (int)Math.ceil((currentPlayerScore * .10));
 					playerList[iterator].updateScore(currentPlayerScore - taxOnCurrent);
 					totalTax += taxOnCurrent;
 				}
@@ -196,3 +195,5 @@ public class conditionCheck
 	  
 	
 }
+
+//String playName = scan.next();
