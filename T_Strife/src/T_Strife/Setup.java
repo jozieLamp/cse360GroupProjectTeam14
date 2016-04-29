@@ -145,28 +145,47 @@ public class Setup
 			Object action = event.getSource();
 			if (action == start)
 			{
-				playerNames[0] = slot1.getText();
-				playerNames[1] = slot2.getText();
-				playerNames[2] = slot3.getText();
-				playerNames[3] = slot4.getText();
-				playerNames[4] = slot5.getText();
-				playerNames[5] = slot6.getText();
-			
-				GameData game = new GameData();
-				Random rand = new Random();
+				boolean dupe = true;
+				while (dupe)
+				{
+					dupe = false;
+					boolean found = false;
+					playerNames[0] = slot1.getText();
+					playerNames[1] = slot2.getText();
+					playerNames[2] = slot3.getText();
+					playerNames[3] = slot4.getText();
+					playerNames[4] = slot5.getText();
+					playerNames[5] = slot6.getText();
+					
+					GameData game = new GameData();
+					Random rand = new Random();
+					
+					int disadvantagedIndex = rand.nextInt(countPlayers);
+					int winPoints = 100;
+					
+					Controller.setNumPlayers(countPlayers, game);
+					Controller.setPlayers(playerNames, disadvantagedIndex, game);
+					Controller.setWinPoints(winPoints, game);
+					
+					frame.setVisible(false);
+					
+					game.gameboard = new Gameboard(Controller.getPlayers(game), game);
+					
+					for (int temp = 0; temp < playerNames.length; temp++)
+					{
+						for (int check = temp+1; check < playerNames.length; temp++)
+						{
+							if (playerNames[temp].equals(playerNames[check]))
+							{
+								JOptionPane error = new JOptionPane();
+								error.showMessageDialog(new JFrame(), "There cannot be two players with the same name");
+								dupe = true;
+							}
+						}
+					}	
+				}
 				
-				int disadvantagedIndex = rand.nextInt(countPlayers);
-				int winPoints = 10;
-				
-				Controller.setNumPlayers(countPlayers, game);
-				Controller.setPlayers(playerNames, disadvantagedIndex, game);
-				Controller.setWinPoints(winPoints, game);
-				
-				frame.setVisible(false);
-				
-				game.gameboard = new Gameboard(Controller.getPlayers(game), game);
-
-				
+				Controller.game(game);
 			}
 		}
 	} //end of StartListener
